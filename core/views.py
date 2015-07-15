@@ -34,7 +34,6 @@ def lista_eventos(request):
 			record_ocio=""
 			record_viv=""
 			record_emp=""
-			lista_actividades=[]
 			try:		
 				record_ocio=ActOcio.objects.filter(Usuario_owner=request.user)
 			except:
@@ -47,6 +46,7 @@ def lista_eventos(request):
 
 			try:		
 				record_emp=ActEmpleo.objects.filter(Usuario_owner=request.user)
+				print(record_emp)
 			except:
 				print ("No actividades de Empleo")
 
@@ -56,57 +56,92 @@ def lista_eventos(request):
 			return HttpResponse(template.render(Context(diccionario)))
 
 @login_required
+def misactividades(request):
+
+	if request.user.is_authenticated():
+		if request.method=="GET":
+			record_ocio=[]
+			record_viv=[]
+			record_emp=[]
+			record=Usuario.object.filter(user=request.user)
+			for i in record:
+				if i.categoria=="ocio":
+					Aux_ocio=ActOcio.object.filter(titulo=i.titulo)
+					record_ocio.append(Aux_ocio)
+				elif i.categoria=="vivienda":
+					Aux_vivi=ActVivienda.object.filter(titulo=i.titulo)
+					record_viv.append(Aux_vivi)
+				elif i.categoria=="empleo":
+					Aux_emp=ActEmpleo.object.filter(titulo=i.titulo)
+					record_emp.append(Aux_emp)
+			template = get_template("actividades_apuntadas.html")		
+			diccionario = {'record_ocio':record_ocio,'record_viv':record_viv,'record_emp':record_emp}
+		elif request.method=="POST":
+			return("Es un POST")
+@login_required
 def detalle(request, titulo):
 
 	categoria=""
 	Imag=""
-
 	Act_ocio=ActOcio.objects.all()
 	Act_viv=ActVivienda.objects.all()
 	Act_Emp=ActEmpleo.objects.all()
 
-	for i in Act_ocio:
+	if request.method=="GET":	
+		for i in Act_ocio:
 
-		if titulo==i.Titulo:
+			if titulo==i.Titulo:
 
-			categoria="ocio"
-			Tit=i.Titulo
-			Imag=i.Imagen
-			Prec=i.Precio
-			Dirr=i.Direccion
-			Hour=i.Hora
-			Descri=i.Descripcion
-			Afor= i.Aforo_Max
-			fecha=i.Fecha
-			diccionario = {'categoria':categoria,'titulo':Tit,'imagen':Imag,'precio':Prec,'direccion':Dirr,'hora':Hour,'descripcion':Descri,'aforo':Afor,'fecha':fecha, 'request':request}
-	for i in Act_viv:
+				categoria="ocio"
+				Tit=i.Titulo
+				Imag=i.Imagen
+				Prec=i.Precio
+				Dirr=i.Direccion
+				Hour=i.Hora
+				Descri=i.Descripcion
+				Afor= i.Aforo_Max
+				fecha=i.Fecha
+				diccionario = {'categoria':categoria,'titulo':Tit,'imagen':Imag,'precio':Prec,'direccion':Dirr,'hora':Hour,'descripcion':Descri,'aforo':Afor,'fecha':fecha, 'request':request}
+		for i in Act_viv:
 
-		if titulo==i.Titulo:
+			if titulo==i.Titulo:
 
-			categoria="vivienda"
-			Tit=i.Titulo
-			imag=i.Imagen
-			prec=i.Precio
-			Dirr=i.Direccion
-			num_habt=i.NumHab
-			Descri=i.Descripcion
-			Toferta= i.TipoOferta
-			diccionario = {'categoria':categoria,'titulo':Tit,'imagen':Imag,'precio':prec,'direccion':Dirr,'num_habt':num_habt,'descripcion':Descri,'Toferta':Toferta, 'request':request}		
+				categoria="vivienda"
+				Tit=i.Titulo
+				imag=i.Imagen
+				prec=i.Precio
+				Dirr=i.Direccion
+				num_habt=i.NumHab
+				Descri=i.Descripcion
+				Toferta= i.TipoOferta
+				diccionario = {'categoria':categoria,'titulo':Tit,'imagen':Imag,'precio':prec,'direccion':Dirr,'num_habt':num_habt,'descripcion':Descri,'Toferta':Toferta, 'request':request}		
 
-	for i in Act_Emp:
-		if titulo==i.Titulo:
-			categoria="empleo"
-			Tit=i.Titulo
-			Imag="empleo.png"
-			Sueldo=i.Sueldo
-			Dirr=i.Direccion
-			Periodo=i.Periodo
-			Descri=i.Descripcion
-			Plazas= i.Plazas
-			diccionario = {'categoria':categoria,'titulo':Tit,'imagen':Imag,'Sueldo':Sueldo,'direccion':Dirr,'Periodo':Periodo,'descripcion':Descri,'Plazas':Plazas, 'request':request}		
+		for i in Act_Emp:
+			if titulo==i.Titulo:
+				categoria="empleo"
+				Tit=i.Titulo
+				Imag="empleo.png"
+				Sueldo=i.Sueldo
+				Dirr=i.Direccion
+				Periodo=i.Periodo
+				Descri=i.Descripcion
+				Plazas= i.Plazas
+				diccionario = {'categoria':categoria,'titulo':Tit,'imagen':Imag,'Sueldo':Sueldo,'direccion':Dirr,'Periodo':Periodo,'descripcion':Descri,'Plazas':Plazas, 'request':request}		
 
-	template = get_template("detalle_ocio.html")	
-	return HttpResponse(template.render(Context(diccionario)))				
+		template = get_template("detalle_ocio.html")	
+		return HttpResponse(template.render(Context(diccionario)))				
+	elif request.method=="POST":
+		categoria=request.POST['categoria']
+		usuario=reques.POST['usuario']
+		titulo=request.POST['titulo']
+		# Guardar actividad usuario
+		try:
+			record=Usuario.objects.get(ActSubscrita=titulo)
+		except:
+			Nueva_Actividad_user=Usuario(user=usuario,ActSubscrita=titulo,Categoria=categoria)
+			Nueva_actividad_user.save()
+		url_redireccion="/detalle/"+str(titulo)
+		return HttpResponseRedirect(url_redireccion)
 
 
 @login_required
@@ -172,7 +207,8 @@ def ofertar(request,categoria):
 				record=ActEmpleo.objects.get(Titulo=titul)
 				response = {'message': False}
 			except:
-				Nueva_Empleo=ActEmpleo(Ciudad=ciuda,Direccion=direccio,Titulo=titul,Descripcion=descripcio,Sueldo=sueldo,Periodo=periodo,Plazas=plazas)
+
+				Nueva_Empleo=ActEmpleo(Ciudad=ciuda,Direccion=direccio,Titulo=titul,Descripcion=descripcio,Sueldo=sueldo,Periodo=periodo,Plazas=plazas,Usuario_owner=propietario)
 				Nueva_Empleo.save()
 				response = {'message': True}			
 			#return HttpResponseRedirect("/ofertar/empleo")

@@ -31,6 +31,7 @@ urlpatterns = [
         url(r'^ofertar/(?P<categoria>.+)/$', coreviews.ofertar),
         url(r'^buscar/(?P<categoria>.+)/$', coreviews.buscar),
         url(r'^calendario', coreviews.calendario),
+        url(r'^misactividades', coreviews.misactividades),
 ]
 
 
