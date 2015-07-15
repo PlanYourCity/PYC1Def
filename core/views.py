@@ -9,6 +9,7 @@ from django.template.loader import get_template
 from core.models import ActOcio
 from core.models import ActVivienda
 from core.models import ActEmpleo
+from core.models import Usuario
 from django.template import Context
 from django.contrib.auth.decorators import login_required
 
@@ -63,19 +64,20 @@ def misactividades(request):
 			record_ocio=[]
 			record_viv=[]
 			record_emp=[]
-			record=Usuario.object.filter(user=request.user)
+			record=Usuario.objects.filter(User=request.user)
 			for i in record:
-				if i.categoria=="ocio":
-					Aux_ocio=ActOcio.object.filter(titulo=i.titulo)
-					record_ocio.append(Aux_ocio)
-				elif i.categoria=="vivienda":
-					Aux_vivi=ActVivienda.object.filter(titulo=i.titulo)
-					record_viv.append(Aux_vivi)
-				elif i.categoria=="empleo":
-					Aux_emp=ActEmpleo.object.filter(titulo=i.titulo)
-					record_emp.append(Aux_emp)
-			template = get_template("actividades_apuntadas.html")		
-			diccionario = {'record_ocio':record_ocio,'record_viv':record_viv,'record_emp':record_emp}
+				if i.Categoria=="ocio":
+					record_ocio+=ActOcio.objects.filter(Titulo=i.ActSubscrita)
+				
+				elif i.Categoria=="vivienda":
+					record_viv+=ActVivienda.objects.filter(Titulo=i.ActSubscrita)
+
+				elif i.Categoria=="empleo":
+					record_emp+=ActEmpleo.objects.filter(Titulo=i.ActSubscrita)
+	
+			template = get_template("Actividades_apuntadas.html")		
+			diccionario = {'record_ocio':record_ocio,'record_viv':record_viv,'record_emp':record_emp, 'request':request}
+			return HttpResponse(template.render(Context(diccionario)))
 		elif request.method=="POST":
 			return("Es un POST")
 @login_required
@@ -131,17 +133,21 @@ def detalle(request, titulo):
 		template = get_template("detalle_ocio.html")	
 		return HttpResponse(template.render(Context(diccionario)))				
 	elif request.method=="POST":
+		respuesta = {}
 		categoria=request.POST['categoria']
-		usuario=reques.POST['usuario']
+		usuario=request.POST['usuario']
 		titulo=request.POST['titulo']
 		# Guardar actividad usuario
 		try:
 			record=Usuario.objects.get(ActSubscrita=titulo)
+			response = {'message': False}
 		except:
-			Nueva_Actividad_user=Usuario(user=usuario,ActSubscrita=titulo,Categoria=categoria)
-			Nueva_actividad_user.save()
-		url_redireccion="/detalle/"+str(titulo)
-		return HttpResponseRedirect(url_redireccion)
+			Nueva_Actividad_user=Usuario(User=usuario,ActSubscrita=titulo,Categoria=categoria)
+			Nueva_Actividad_user.save()
+			response = {'message': True}
+		#url_redireccion="/detalle/"+str(titulo)
+		#return HttpResponseRedirect(url_redireccion)
+		return HttpResponse(json.dumps(response), content_type="application/json")
 
 
 @login_required
