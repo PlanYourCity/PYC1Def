@@ -28,16 +28,31 @@ def inicio(request):
 @login_required
 def lista_eventos(request):
 
-	if request.method == "GET":
-		lista_actividades=[]
-		
-		record=ActOcio.objects.all()
-		#record.delete()
-		template = get_template("listado.html")		
-		diccionario = {'record':record}		
-		return HttpResponse(template.render(Context(diccionario)))
-	else:
-		return ("no es GET")
+	if request.user.is_authenticated():
+		if request.method == "GET":
+			record_ocio=""
+			record_viv=""
+			record_emp=""
+			lista_actividades=[]
+			try:		
+				record_ocio=ActOcio.objects.filter(Usuario_owner=request.user)
+			except:
+				print ("No actividades de ocio")
+
+			try:		
+				record_viv=ActVivienda.objects.filter(Usuario_owner=request.user)
+			except:
+				print ("No actividades de vivienda")
+
+			try:		
+				record_emp=ActEmpleo.objects.filter(Usuario_owner=request.user)
+			except:
+				print ("No actividades de Empleo")
+
+			template = get_template("listado_mis_actividades.html")		
+			diccionario = {'record_ocio':record_ocio,'record_viv':record_viv,'record_emp':record_emp}	
+
+			return HttpResponse(template.render(Context(diccionario)))
 
 @login_required
 def detalle(request, titulo):
