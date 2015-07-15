@@ -171,17 +171,12 @@ def ofertar(request,categoria):
 				record=ActEmpleo.objects.get(Titulo=titul)
 				response = {'message': False}
 			except:
-<<<<<<< HEAD
+
 				Nueva_Empleo=ActEmpleo(Ciudad=ciuda,Direccion=direccio,Titulo=titul,Descripcion=descripcio,Sueldo=sueldo,Periodo=periodo,Plazas=plazas,Usuario_owner=propietario)
-				Nueva_Empleo.save()			
-			return HttpResponseRedirect("/ofertar/empleo")
-=======
-				Nueva_Empleo=ActEmpleo(Ciudad=ciuda,Direccion=direccio,Titulo=titul,Descripcion=descripcio,Sueldo=sueldo,Periodo=periodo,Plazas=plazas)
 				Nueva_Empleo.save()
 				response = {'message': True}			
 			#return HttpResponseRedirect("/ofertar/empleo")
 			return HttpResponse(json.dumps(response), content_type="application/json")
->>>>>>> 0c9d0df63583b56772221be2c4aa699f83302ffd
 		#else
 			#except:
 			#canal="<h1> la url del canal introducido no es valida</h1>"
