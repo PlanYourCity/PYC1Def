@@ -33,7 +33,6 @@ def lista_eventos(request):
 			record_ocio=""
 			record_viv=""
 			record_emp=""
-			lista_actividades=[]
 			try:		
 				record_ocio=ActOcio.objects.filter(Usuario_owner=request.user)
 			except:
@@ -46,6 +45,7 @@ def lista_eventos(request):
 
 			try:		
 				record_emp=ActEmpleo.objects.filter(Usuario_owner=request.user)
+				print(record_emp)
 			except:
 				print ("No actividades de Empleo")
 
@@ -168,7 +168,7 @@ def ofertar(request,categoria):
 			try:
 				record=ActEmpleo.objects.get(Titulo=titul)
 			except:
-				Nueva_Empleo=ActEmpleo(Ciudad=ciuda,Direccion=direccio,Titulo=titul,Descripcion=descripcio,Sueldo=sueldo,Periodo=periodo,Plazas=plazas)
+				Nueva_Empleo=ActEmpleo(Ciudad=ciuda,Direccion=direccio,Titulo=titul,Descripcion=descripcio,Sueldo=sueldo,Periodo=periodo,Plazas=plazas,Usuario_owner=propietario)
 				Nueva_Empleo.save()			
 			return HttpResponseRedirect("/ofertar/empleo")
 		#else
