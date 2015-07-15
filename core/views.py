@@ -22,8 +22,9 @@ def home(request):
 
 @login_required
 def inicio(request):
-	template = get_template("base.html")				
-	return HttpResponse(template.render(Context()))	
+	return render(request, 'base.html')
+	#template = get_template("base.html")				
+	#return HttpResponse(template.render(Context()))	
 
 @login_required
 def lista_eventos(request):
@@ -50,7 +51,7 @@ def lista_eventos(request):
 				print ("No actividades de Empleo")
 
 			template = get_template("listado_mis_actividades.html")		
-			diccionario = {'record_ocio':record_ocio,'record_viv':record_viv,'record_emp':record_emp}	
+			diccionario = {'record_ocio':record_ocio,'record_viv':record_viv,'record_emp':record_emp, 'request':request}	
 
 			return HttpResponse(template.render(Context(diccionario)))
 
@@ -77,7 +78,7 @@ def detalle(request, titulo):
 			Descri=i.Descripcion
 			Afor= i.Aforo_Max
 			fecha=i.Fecha
-			diccionario = {'categoria':categoria,'titulo':Tit,'imagen':Imag,'precio':Prec,'direccion':Dirr,'hora':Hour,'descripcion':Descri,'aforo':Afor,'fecha':fecha}
+			diccionario = {'categoria':categoria,'titulo':Tit,'imagen':Imag,'precio':Prec,'direccion':Dirr,'hora':Hour,'descripcion':Descri,'aforo':Afor,'fecha':fecha, 'request':request}
 	for i in Act_viv:
 
 		if titulo==i.Titulo:
@@ -90,7 +91,7 @@ def detalle(request, titulo):
 			num_habt=i.NumHab
 			Descri=i.Descripcion
 			Toferta= i.TipoOferta
-			diccionario = {'categoria':categoria,'titulo':Tit,'imagen':Imag,'precio':prec,'direccion':Dirr,'num_habt':num_habt,'descripcion':Descri,'Toferta':Toferta}		
+			diccionario = {'categoria':categoria,'titulo':Tit,'imagen':Imag,'precio':prec,'direccion':Dirr,'num_habt':num_habt,'descripcion':Descri,'Toferta':Toferta, 'request':request}		
 
 	for i in Act_Emp:
 		if titulo==i.Titulo:
@@ -102,7 +103,7 @@ def detalle(request, titulo):
 			Periodo=i.Periodo
 			Descri=i.Descripcion
 			Plazas= i.Plazas
-			diccionario = {'categoria':categoria,'titulo':Tit,'imagen':Imag,'Sueldo':Sueldo,'direccion':Dirr,'Periodo':Periodo,'descripcion':Descri,'Plazas':Plazas}		
+			diccionario = {'categoria':categoria,'titulo':Tit,'imagen':Imag,'Sueldo':Sueldo,'direccion':Dirr,'Periodo':Periodo,'descripcion':Descri,'Plazas':Plazas, 'request':request}		
 
 	template = get_template("detalle_ocio.html")	
 	return HttpResponse(template.render(Context(diccionario)))				
@@ -115,7 +116,7 @@ def ofertar(request,categoria):
 	if request.method=="GET":		
 										
 		template = get_template("form_ofertar.html")		
-		diccionario = {'categoria':categoria}		
+		diccionario = {'categoria':categoria, 'request':request}		
 		return HttpResponse(template.render(Context(diccionario)))
 
 	elif request.method == "POST":
@@ -189,7 +190,7 @@ def buscar(request,categoria):
 	if request.method=="GET":		
 									
 		template = get_template("busqueda.html")		
-		diccionario = {'categ':categoria}		
+		diccionario = {'categ':categoria, 'request':request}		
 		return HttpResponse(template.render(Context(diccionario)))
 
 
@@ -223,7 +224,7 @@ def buscar(request,categoria):
 
 			if record != []:
 				template = get_template("listado.html")		
-				diccionario = {'record':record,'categoria':categoria}	
+				diccionario = {'record':record,'categoria':categoria, 'request':request}	
 				return HttpResponse(template.render(Context(diccionario)))
 
 			else:
@@ -256,7 +257,7 @@ def buscar(request,categoria):
 			if record != []:
 				template = get_template("listado.html")		
 				print(categoria)
-				diccionario = {'record':record,'categoria':categoria}	
+				diccionario = {'record':record,'categoria':categoria, 'request':request}	
 				return HttpResponse(template.render(Context(diccionario)))
 
 			else:
@@ -281,7 +282,7 @@ def buscar(request,categoria):
 		
 			if record != []:
 				template = get_template("listado.html")		
-				diccionario = {'record':record,'Imag':Imag,'categoria':categoria}	
+				diccionario = {'record':record,'Imag':Imag,'categoria':categoria, 'request':request}	
 				return HttpResponse(template.render(Context(diccionario)))
 
 			else:
@@ -296,6 +297,6 @@ def calendario(request):
 	if request.method == "GET":
 		titulo="Calendario"
 		template = get_template("enConstruccion.html")
-		diccionario = {'titulo':titulo}
+		diccionario = {'titulo':titulo, 'request':request}
 		
 		return HttpResponse(template.render(Context(diccionario)))
