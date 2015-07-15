@@ -36,6 +36,7 @@ html, body {
 	vertical-align: middle;
 	text-align: center;
 	border-bottom: solid;
+	border-width: 2px;
 	font-weight: normal;
 	font-family: Babaca !important;
 }
