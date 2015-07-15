@@ -58,14 +58,19 @@
 
 	<div id="contenido" class="container-fluid">	
 		<div class="row cabecera">
-			<div class="col-lg-11">
+			<div class="col-lg-10">
 				<h1>Plan Your City</h1>
 			</div>
 
 			<div class="col-lg-1">
-				<button id="funcUsuario" type="button" class="btn btn-default btn-primary boton" aria-label="Left Align">
-				  <span class="glyphicon glyphicon glyphicon-user" aria-hidden="true"></span>
-				</button>
+
+				<a class="btn btn-default btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
+			    	<span class="glyphicon glyphicon glyphicon-user"> {{request.user}}</span>
+			  	</a>
+			  	<ul class="dropdown-menu">
+			    	<li><a href="http://localhost:8000/listado/">Eventos creados</a></li>
+			    	<li><a href="#">Log out</a></li>
+			  	</ul>
 			</div>
 		</div>
 
