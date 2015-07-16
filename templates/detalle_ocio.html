@@ -38,6 +38,13 @@
 					</div>
 				</div>
 			</div>
+			
+			<form id="formDetalle">
+				<input type="hidden" name="categoria" value="{{categoria}}">
+				<input type="hidden" name="titulo" value="{{titulo}}">
+				<input type="hidden" name="usuario" value="{{request.user}}">
+			</form>
+
 			<div class="float_items_detalle main_data">
 
 				{% ifequal categoria "ocio" %}
