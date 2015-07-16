@@ -1,15 +1,12 @@
 {% extends 'base.html' %}
 	{% block content %}
-	<link rel="stylesheet" type="text/css" href="/static/css/style_listado_mis_actividades.css">
-		<h3>Mis ofertas creadas</h3>
-			{% if record_ocio  %}
+	<link rel="stylesheet" type="text/css" href="/static/css/style_listado_actividades_suscritas.css">
+		<h3>Actividades a las que me he suscrito</h3>
+			{% if record_ocio %}
 				<h4>Ocio</h4>
 			{% endif %}
 			{% for i in record_ocio %}
 				<div class="evento">
-					<div class="eliminar_div">
-						<button type="button" class="glyphicon glyphicon-remove eliminar_boton" title="Eliminar actividad" onclick=""></button>
-					</div>
 					<div class="imagenEvento">
 						<img src="../../static/images/{{i.Imagen}}">
 					</div>
