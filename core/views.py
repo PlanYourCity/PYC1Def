@@ -55,6 +55,28 @@ def lista_eventos(request):
 			diccionario = {'record_ocio':record_ocio,'record_viv':record_viv,'record_emp':record_emp, 'request':request}	
 
 			return HttpResponse(template.render(Context(diccionario)))
+			
+		elif request.method == "POST":
+
+			titulo=request.POST['titulo']
+
+			try:
+				record_ocio=ActOcio.objects.filter(Titulo=titulo)
+				record_ocio.delete()
+			except:
+				print ("No es actividad de ocio")
+			try:
+				record_vivi=ActVivienda.objects.filter(Titulo=titulo)
+				record_vivi.delete()
+			except:
+				print ("No es actividad de vivienda")
+			try:	
+				record_emp=ActEmpleo.objects.filter(Titulo=titulo)
+				record_emp.delete()
+			except:
+				print ("No es actividad de empleo")
+
+			return HttpResponseRedirect("listado/")
 
 @login_required
 def misactividades(request):
@@ -133,11 +155,13 @@ def detalle(request, titulo):
 		template = get_template("detalle_ocio.html")	
 		return HttpResponse(template.render(Context(diccionario)))				
 	elif request.method=="POST":
+
+		#if request.POST['action'] == "follow":
 		respuesta = {}
 		categoria=request.POST['categoria']
 		usuario=request.POST['usuario']
 		titulo=request.POST['titulo']
-		# Guardar actividad usuario
+			# Guardar actividad usuario
 		try:
 			record=Usuario.objects.get(ActSubscrita=titulo)
 			response = {'message': False}
@@ -145,10 +169,21 @@ def detalle(request, titulo):
 			Nueva_Actividad_user=Usuario(User=usuario,ActSubscrita=titulo,Categoria=categoria)
 			Nueva_Actividad_user.save()
 			response = {'message': True}
-		#url_redireccion="/detalle/"+str(titulo)
-		#return HttpResponseRedirect(url_redireccion)
 		return HttpResponse(json.dumps(response), content_type="application/json")
-
+		'''
+		else:
+			usuario=request.POST['usuario']
+			titulo=request.POST['titulo']
+			# Guardar actividad usuario
+			try:
+				unfollowAct=Usuario.objects.filter(User=usuario,ActSubscrita=titulo)
+				unfollowAct.delete()
+				response = {'message': True}
+				return HttpResponse(json.dumps(response), content_type="application/json")
+			except:
+				response = {'message': False}
+				return HttpResponse(json.dumps(response), content_type="application/json")
+				'''
 
 @login_required
 def ofertar(request,categoria):
