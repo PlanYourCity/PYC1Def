@@ -138,8 +138,14 @@
 			<div class="white_box margin_top" id="description">
 				Descripción:&nbsp;{{descripcion}}
 			</div>
-			<div id="follow_me_button_div">
-				<button type="button" class="white_box margin_top" id="follow_me">¡Sígueme!</button>
-			</div>
+			{% ifequal siguiendo "False" %}
+				<div id="follow_me_button_div">
+					<button type="button" class="white_box margin_top" id="follow_me">¡Sígueme!</button>
+				</div>
+			{% else %}
+				<div id="follow_me_button_div">
+					<button type="button" class="white_box margin_top boton_rojo" id="follow_me">Dejar de seguir</button>
+				</div>
+			{% endifequal %}
 		</div>
 	{% endblock %}
