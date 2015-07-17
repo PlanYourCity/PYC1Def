@@ -167,8 +167,6 @@ def detalle(request, titulo):
 			Nueva_Actividad_user=Usuario(User=usuario,ActSubscrita=titulo,Categoria=categoria)
 			Nueva_Actividad_user.save()
 			response = {'message': True}
-		#url_redireccion="/detalle/"+str(titulo)
-		#return HttpResponseRedirect(url_redireccion)
 		return HttpResponse(json.dumps(response), content_type="application/json")
 
 
