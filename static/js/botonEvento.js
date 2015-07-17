@@ -28,6 +28,8 @@ $('document').ready(function(){
 	$('.eliminar_boton').click(function(){
 		$('.evento').removeClass('hoverEvento');
 		if(confirm("¿Eliminar actividad?")) {
+			var eventoEliminar = $(this).parent().parent();
+			$(eventoEliminar).hide("drop", { direction: "down" }, "slow");
 			var url = "/listado/";
 			var datos = "titulo=" + $(this).parent().parent().find("h3").text();
 			$.ajax({
