@@ -55,6 +55,28 @@ def lista_eventos(request):
 			diccionario = {'record_ocio':record_ocio,'record_viv':record_viv,'record_emp':record_emp, 'request':request}	
 
 			return HttpResponse(template.render(Context(diccionario)))
+			
+		elif request.method == "POST":
+
+			titulo=request.POST['titulo']
+
+			try:
+				record_ocio=ActOcio.objects.filter(Titulo=titulo)
+				record_ocio.delete()
+			except:
+				print ("No es actividad de ocio")
+			try:
+				record_vivi=ActVivienda.objects.filter(Titulo=titulo)
+				record_vivi.delete()
+			except:
+				print ("No es actividad de vivienda")
+			try:	
+				record_emp=ActEmpleo.objects.filter(Titulo=titulo)
+				record_emp.delete()
+			except:
+				print ("No es actividad de empleo")
+
+			return HttpResponseRedirect("listado/")
 
 @login_required
 def misactividades(request):
