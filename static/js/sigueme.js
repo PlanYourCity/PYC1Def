@@ -6,6 +6,7 @@ $('document').ready(function(){
 	
 	var url = "/detalle/"+titulo+"/";
 	var datos = $('#formDetalle').serialize();
+	var textoBoton = $(this).text();
 
 	$.ajax({
 	  method: "POST",
@@ -13,8 +14,17 @@ $('document').ready(function(){
 	  data: datos,
 	  success: function(data){
 	  	if(data.message == true){
-	  		alertify.set('notifier','position','top-right');
-			alertify.success('¡¡Siguiendo evento!!');
+	  		if(textoBoton === "¡Sígueme!"){
+	  			$("#follow_me").animate({
+	  				backgroundColor: "red"
+	  			},500);
+	  			$("#follow_me").text("Dejar de seguir");
+	  		}else{
+	  			$("#follow_me").animate({
+	  				backgroundColor: "#2E6EA5"
+	  			},500);
+	  			$("#follow_me").text("¡Sígueme!");
+	  		}
 	  	}
 	  	else{
 	  		alertify.set('notifier','position','top-right');
