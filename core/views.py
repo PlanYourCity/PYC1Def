@@ -156,20 +156,21 @@ def detalle(request, titulo):
 		return HttpResponse(template.render(Context(diccionario)))				
 	elif request.method=="POST":
 
-		if request.POST['action'] == "follow":
-			respuesta = {}
-			categoria=request.POST['categoria']
-			usuario=request.POST['usuario']
-			titulo=request.POST['titulo']
+		#if request.POST['action'] == "follow":
+		respuesta = {}
+		categoria=request.POST['categoria']
+		usuario=request.POST['usuario']
+		titulo=request.POST['titulo']
 			# Guardar actividad usuario
-			try:
-				record=Usuario.objects.get(ActSubscrita=titulo)
-				response = {'message': False}
-			except:
-				Nueva_Actividad_user=Usuario(User=usuario,ActSubscrita=titulo,Categoria=categoria)
-				Nueva_Actividad_user.save()
-				response = {'message': True}
-			return HttpResponse(json.dumps(response), content_type="application/json")
+		try:
+			record=Usuario.objects.get(ActSubscrita=titulo)
+			response = {'message': False}
+		except:
+			Nueva_Actividad_user=Usuario(User=usuario,ActSubscrita=titulo,Categoria=categoria)
+			Nueva_Actividad_user.save()
+			response = {'message': True}
+		return HttpResponse(json.dumps(response), content_type="application/json")
+		'''
 		else:
 			usuario=request.POST['usuario']
 			titulo=request.POST['titulo']
@@ -182,6 +183,7 @@ def detalle(request, titulo):
 			except:
 				response = {'message': False}
 				return HttpResponse(json.dumps(response), content_type="application/json")
+				'''
 
 @login_required
 def ofertar(request,categoria):
