@@ -22,6 +22,10 @@
 	overflow: auto;
 }
 
+.boton_rojo {
+	background-color: red !important;
+}
+
 .main_data {
 	font-size: 24px;
 }
