@@ -2,14 +2,11 @@
 	{% block content %}
 	<link rel="stylesheet" type="text/css" href="/static/css/style_listado_mis_actividades.css">
 		<h3>Mis ofertas creadas</h3>
-			{% if record_ocio  %}
+			{% if record_ocio != null %}
 				<h4>Ocio</h4>
 			{% endif %}
 			{% for i in record_ocio %}
 				<div class="evento">
-					<div class="eliminar_div">
-						<button type="button" class="glyphicon glyphicon-remove eliminar_boton" title="Eliminar actividad" onclick=""></button>
-					</div>
 					<div class="imagenEvento">
 						<img src="../../static/images/{{i.Imagen}}">
 					</div>
@@ -28,7 +25,7 @@
 				</div>
 			{% endfor %}
 
-			{% if record_viv %}
+			{% if record_viv != null %}
 				<h4>Vivienda</h4>
 			{% endif %}
 			{% for i in record_viv %}
@@ -53,10 +50,11 @@
 			{% endfor %}
 
 
-			{% if record_emp %}
+			{% if record_emp != null %}
 				<h4>Empleo</h4>
 			{% endif %}
 			{% for i in record_emp %}
+			<h4>Empleo</h4>
 				<div class="evento">
 					<div class="imagenEvento">
 						<img src="../../static/images/{{i.Imagen}}">

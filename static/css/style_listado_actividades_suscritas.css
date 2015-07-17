@@ -3,25 +3,9 @@ h4 {
 	font-weight: bold;
 }
 
-.eliminar_div {
-	float:right;
-}
-
-.eliminar_boton {
-	color:red;
-	background-color: transparent;
-    background-repeat:no-repeat;
-    border: none;
-    cursor:pointer;
-    outline:none;
-	float:right;
-	overflow: visible;
-}
-
 .detallesEvento > h3{
 	text-align: center;
 	margin-top: 0px;
-	z-index: 1;
 }
 
 
