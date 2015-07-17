@@ -155,6 +155,7 @@ def detalle(request, titulo):
 		template = get_template("detalle_ocio.html")	
 		return HttpResponse(template.render(Context(diccionario)))				
 	elif request.method=="POST":
+<<<<<<< HEAD
 		respuesta = {}
 		categoria=request.POST['categoria']
 		usuario=request.POST['usuario']
@@ -168,6 +169,34 @@ def detalle(request, titulo):
 			Nueva_Actividad_user.save()
 			response = {'message': True}
 		return HttpResponse(json.dumps(response), content_type="application/json")
+=======
+		if request.POST['action'] == "follow":
+			respuesta = {}
+			categoria=request.POST['categoria']
+			usuario=request.POST['usuario']
+			titulo=request.POST['titulo']
+			# Guardar actividad usuario
+			try:
+				record=Usuario.objects.get(ActSubscrita=titulo)
+				response = {'message': False}
+			except:
+				Nueva_Actividad_user=Usuario(User=usuario,ActSubscrita=titulo,Categoria=categoria)
+				Nueva_Actividad_user.save()
+				response = {'message': True}
+			return HttpResponse(json.dumps(response), content_type="application/json")
+		else:
+			usuario=request.POST['usuario']
+			titulo=request.POST['titulo']
+			# Guardar actividad usuario
+			try:
+				unfollowAct=Usuario.objects.filter(User=usuario,ActSubscrita=titulo)
+				unfollowAct.delete()
+				response = {'message': True}
+				return HttpResponse(json.dumps(response), content_type="application/json")
+			except:
+				response = {'message': False}
+				return HttpResponse(json.dumps(response), content_type="application/json")
+>>>>>>> 2c19c282fae9277011838675aadf2536f3f99e67
 
 
 @login_required
