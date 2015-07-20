@@ -12,6 +12,7 @@ from core.models import ActEmpleo
 from core.models import Usuario
 from django.template import Context
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 import json
 
@@ -273,16 +274,24 @@ def ofertar(request,categoria):
 			#return HttpResponse(template.render(Context(diccionario)))
 
 @login_required
-def buscar(request,categoria):
+def menu_buscar(request,categoria):
 
 	if request.method=="GET":		
 									
 		template = get_template("busqueda.html")		
-		diccionario = {'categ':categoria, 'request':request}		
+		diccionario = {'categ':categoria, 'request':request, 'page':1}		
 		return HttpResponse(template.render(Context(diccionario)))
 
 
-	elif request.method == "POST":			
+@login_required
+def buscar(request,categoria,page):
+	global record
+
+
+									
+
+
+	if request.method == "POST":			
 					
 		ciudad=str(request.POST['provincia'])
 		titulo=str(request.POST['titulo'])
@@ -310,16 +319,6 @@ def buscar(request,categoria):
 			if direc != "":
 				record=record.filter(Direccion__contains=direc)
 
-			if record != []:
-				template = get_template("listado.html")		
-				diccionario = {'record':record,'categoria':categoria, 'request':request}	
-				return HttpResponse(template.render(Context(diccionario)))
-
-			else:
-				print("estoy aqui")
-				template = get_template("listado.html")		
-				return HttpResponse(template.render(Context("No existe actividad que cumpla los requisitos")))
-
 
 		if categoria=="vivienda":	
 			record=""
@@ -342,17 +341,6 @@ def buscar(request,categoria):
 			if direc != "":
 				record=record.filter(Direccion__contains=direc)
 	
-			if record != []:
-				template = get_template("listado.html")		
-				print(categoria)
-				diccionario = {'record':record,'categoria':categoria, 'request':request}	
-				return HttpResponse(template.render(Context(diccionario)))
-
-			else:
-				print("estoy aqui")
-				template = get_template("listado.html")		
-				return HttpResponse(template.render(Context("No existe actividad que cumpla los requisitos")))
-
 
 		if categoria=="empleo":	
 			sueldo=str(request.POST['sueldo'])
@@ -368,15 +356,21 @@ def buscar(request,categoria):
 			if periodo != "":
 				record=record.filter(Periodo=periodo)
 		
-			if record != []:
-				template = get_template("listado.html")		
-				diccionario = {'record':record,'Imag':Imag,'categoria':categoria, 'request':request}	
-				return HttpResponse(template.render(Context(diccionario)))
 
-			else:
-				print("estoy aqui")
-				template = get_template("listado.html")		
-				return HttpResponse(template.render(Context("No existe actividad que cumpla los requisitos")))
+	
+	paginator = Paginator(record, 4) # Show 25 contacts per page
+
+	#page = request.GET.get('page')
+	print(page)
+	try:
+		eventos = paginator.page(page)
+	except PageNotAnInteger:
+		# If page is not an integer, deliver first page.
+		eventos = paginator.page(1)
+
+	template = get_template("listado.html")
+	diccionario = {'record':eventos,'categoria':categoria,'request':request}
+	return HttpResponse(template.render(Context(diccionario)))
 
 
 
