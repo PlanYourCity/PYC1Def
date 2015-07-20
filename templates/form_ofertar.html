@@ -75,70 +75,49 @@
 				</div>
 			</div>
 			<div class="float_items">
-				<div class="campo">
+				<label class="campo">
 					Dirección:
-				</div>
-				<div class="campo_rellenar">
-					<input class="entrada" type="text" name="Direccion" value=""/>
-				</div>
+				</label>
+				<input class="entrada campo_rellenar" type="text" name="Direccion" value=""/>
+				<label class="msgError"></label>
 			</div>
 			<div class="float_items">
-				<div class="campo">
+				<label class="campo">
 					Título evento:
-				</div>
-				<div class="campo_rellenar">
-					<input class="entrada" type="text" name="Titulo" value=""/>
-				</div>
+				</label>
+				<input class="entrada campo_rellenar" type="text" name="Titulo" value=""/>
+				<label class="msgError"></label>
 			</div>
 			<div class="float_items">
-				<div class="campo">
-					Descripción:
-				</div>
-				<div class="campo_rellenar">
-					<textarea class="entrada" name="Descripcion" rows="4" cols="50" placeholder="Describe detalladamente el evento"></textarea>
-				</div>
+				<label class="campo">Descripción:</label>
+				<textarea class="entrada campo_rellenar" name="Descripcion" rows="4" cols="50" placeholder="Describe detalladamente el evento"></textarea>
+				<label class="msgError"></label>
 			</div>
 
 			{% ifequal categoria "ocio" %}
 				<div class="float_items">
-					<div class="campo">
-						Precio (€):
-					</div>
-					<div class="campo_rellenar">
-						<input class="entrada" type="text" name="Precio" value=""/>
-					</div>
+					<label class="campo">Precio (€):</label>
+					<input class="entrada campo_rellenar" type="number" name="Precio" value=""/>
+					<label class="msgError"></label>
 				</div>
 				<div class="float_items">
-					<div class="campo">
-						Aforo:
-					</div>
-					<div class="campo_rellenar">
-						<input class="entrada" type="number" name="Aforo_Max" value="" placeholder="Cantidad máxima de personas"/>
-					</div>
+					<label class="campo">Aforo:</label>
+					<input class="entrada campo_rellenar" type="number" name="Aforo_Max" value="" placeholder="Cantidad máxima de personas"/>
+					<label class="msgError"></label>
 				</div>
 				<div class="float_items">
-					<div class="campo">
-						Fecha:
-					</div>
-					<div class="campo_rellenar">
-						<input type="date" class="datepicker entrada" name="Fecha"/>
-					</div>
+					<label class="campo">Fecha:</label>
+					<input type="date" class="datepicker entrada campo_rellenar" name="Fecha"/>
+					<label class="msgError"></label>
 				</div>
 				<div class="float_items">
-					<div class="campo">
-						Hora:
-					</div>
-					<div class="campo_rellenar">
-						<input class="entrada" type="text" name="Hora" value="" placeholder="HH:MM"/>	
-					</div>
+					<label class="campo">Hora:</label>
+					<input class="entrada campo_rellenar" type="text" name="Hora" value="" placeholder="HH:MM"/>	
+					<label class="msgError"></label>
 				</div>
 				<div class="float_items">
-					<div class="campo">
-						Imagen:
-					</div>
-					<div class="campo_rellenar">
-						<input class="entrada" type="file" name="Imagen">
-					</div>
+					<label class="campo">Imagen:</label>
+					<input class="entrada campo_rellenar" type="file" name="Imagen">
 				</div>
 			{% endifequal %}
 
@@ -146,62 +125,42 @@
 
 			{% ifequal categoria "vivienda" %}
 				<div class="float_items">
-					<div class="campo">
-						Precio (€):
-					</div>
-					<div class="campo_rellenar">
-						<input class="entrada" type="text" name="Precio" value=""/>
-					</div>
+					<label class="campo">Precio (€):</label>
+					<input class="entrada campo_rellenar" type="number" name="Precio" value=""/>
+					<label class="msgError"></label>
 				</div>
 				<div class="float_items">
-					<div class="campo">
-						Número de habitaciones:
-					</div>
-					<div class="campo_rellenar">
-						<input class="entrada" type="text" name="NumHab" value=""/>
-					</div>
+					<label class="campo">Número de habitaciones:</label>
+					<input class="entrada campo_rellenar" type="text" name="NumHab" value=""/>
+					<label class="msgError"></label>
 				</div>
 				<div class="float_items">
-					<div class="campo">
-						Tipo:
-					</div>
+					<label class="campo">Tipo:</label>
 					<div class="campo_rellenar" class="entrada">
 						<input type="radio" name="TipoOferta" value="alquiler" checked="checked"> Alquiler<br>
 						<input type="radio" name="TipoOferta" value="venta"> Venta
 					</div>
 				</div>
 				<div class="float_items">
-					<div class="campo">
-						Imagen:
-					</div>
-					<div class="campo_rellenar">
-						<input class="entrada" type="file" name="Imagen">
-					</div>
+					<label class="campo">Imagen:</label>
+					<input class="entrada campo_rellenar" type="file" name="Imagen">
 				</div>
 			{% endifequal %}
 
 
 			{% ifequal categoria "empleo" %}
 				<div class="float_items">
-					<div class="campo">
-						Sueldo (€):
-					</div>
-					<div class="campo_rellenar">
-						<input class="entrada" type="text" name="Sueldo" value=""/>
-					</div>
+					<label class="campo">Sueldo (€):</label>
+					<input class="entrada campo_rellenar" type="number" name="Sueldo" value=""/>
+					<label class="msgError"></label>
 				</div>
 				<div class="float_items">
-					<div class="campo">
-						Plazas:
-					</div>
-					<div class="campo_rellenar">
-						<input class="entrada" type="text" name="Plazas" value=""/>
-					</div>
+					<label class="campo">Plazas:</label>
+					<input class="entrada campo_rellenar" type="number" name="Plazas" value=""/>
+					<label class="msgError"></label>
 				</div>
 				<div class="float_items">
-					<div class="campo">
-						Duración del contrato:
-					</div>
+					<label class="campo">Duración del contrato:</label>
 					<div class="campo_rellenar">
 						<select class="entrada" name="Periodo">
 							<option value="">No Especificado</option>

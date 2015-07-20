@@ -24,9 +24,21 @@
 }
 
 .campo_rellenar {
-	width: 80%;
-	float: right;
+	width: 55%;
+	float: left;
 	clear: right;
+	margin-right: 10px;
+}
+
+.msgError{
+	color: red;
+    font-weight: normal;
+    margin: 5px;
+    opacity: 0;
+}
+
+.float_items span{
+	color: red;
 }
 
 .entrada {
