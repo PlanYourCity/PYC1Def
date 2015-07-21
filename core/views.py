@@ -14,6 +14,10 @@ from django.template import Context
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
+from util import events_to_json, calendar_options
+
+
+
 import json
 
 
@@ -76,6 +80,34 @@ def lista_eventos_creados(request):
 
 			return HttpResponseRedirect("listado/")
 
+OPTIONS = """{  timeFormat: "H:mm",
+                header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'month,agendaWeek,agendaDay',
+                },
+                allDaySlot: false,
+                firstDay: 0,
+                weekMode: 'liquid',
+                slotMinutes: 15,
+                defaultEventMinutes: 30,
+                minTime: 8,
+                maxTime: 20,
+                editable: false,
+                dayClick: function(date, allDay, jsEvent, view) {
+                    if (allDay) {       
+                        $('#calendar').fullCalendar('gotoDate', date)      
+                        $('#calendar').fullCalendar('changeView', 'agendaDay')
+                    }
+                },
+                eventClick: function(event, jsEvent, view) {
+                    if (view.name == 'month') {     
+                        $('#calendar').fullCalendar('gotoDate', event.start)      
+                        $('#calendar').fullCalendar('changeView', 'agendaDay')
+                    }
+                },
+            }"""
+
 @login_required
 def misactividades_seguidas(request):
 
@@ -87,13 +119,13 @@ def misactividades_seguidas(request):
 			record=Usuario.objects.filter(User=request.user)
 			for i in record:
 				if i.Categoria=="ocio":
-					record_ocio+=ActOcio.objects.filter(Titulo=i.ActSubscrita)
+					record_ocio+=ActOcio.objects.filter(Titulo=i.title)
 				
 				elif i.Categoria=="vivienda":
-					record_viv+=ActVivienda.objects.filter(Titulo=i.ActSubscrita)
+					record_viv+=ActVivienda.objects.filter(Titulo=i.title)
 
 				elif i.Categoria=="empleo":
-					record_emp+=ActEmpleo.objects.filter(Titulo=i.ActSubscrita)
+					record_emp+=ActEmpleo.objects.filter(Titulo=i.title)
 	
 			template = get_template("Actividades_apuntadas.html")		
 			diccionario = {'record_ocio':record_ocio,'record_viv':record_viv,'record_emp':record_emp, 'request':request}
@@ -109,7 +141,7 @@ def detalle(request, titulo):
 	Act_viv=ActVivienda.objects.all()
 	Act_Emp=ActEmpleo.objects.all() 
 
-	record = Usuario.objects.filter(User=request.user, ActSubscrita= titulo)
+	record = Usuario.objects.filter(User=request.user, title= titulo)
 	if record:
 		siguiendo = "True"
 		print("ya se esta siguiendo")
@@ -169,10 +201,10 @@ def detalle(request, titulo):
 			titulo=request.POST['titulo']
 				# Guardar actividad usuario
 			try:
-				record=Usuario.objects.get(ActSubscrita=titulo)
+				record=Usuario.objects.get(title=titulo)
 				response = {'message': False}
 			except:
-				Nueva_Actividad_user=Usuario(User=usuario,ActSubscrita=titulo,Categoria=categoria)
+				Nueva_Actividad_user=Usuario(User=usuario,title=titulo,Categoria=categoria)
 				Nueva_Actividad_user.save()
 				response = {'message': True, 'siguiendo':True}
 				print("todo ha ido bien insertando")
@@ -184,7 +216,7 @@ def detalle(request, titulo):
 			titulo=request.POST['titulo']
 			# Guardar actividad usuario
 			try:
-				unfollowAct=Usuario.objects.filter(User=usuario,ActSubscrita=titulo)
+				unfollowAct=Usuario.objects.filter(User=usuario,title=titulo)
 				unfollowAct.delete()
 				response = {'message': True, 'siguiendo':False}
 				print("todo ha ido bien borrando")
@@ -380,9 +412,9 @@ def buscar(request,categoria,page):
 
 @login_required
 def calendario(request):
-	if request.method == "GET":
-		titulo="Calendario"
-		template = get_template("enConstruccion.html")
-		diccionario = {'titulo':titulo, 'request':request}
-		
-		return HttpResponse(template.render(Context(diccionario)))
+	event_url = 'all_events/'
+	return render(request, 'index.html', {'calendar_config_options': calendar_options(event_url, OPTIONS)})
+
+def all_events(request):
+	events = Usuario.objects.all()
+	return HttpResponse(events_to_json(events), content_type='application/json')
