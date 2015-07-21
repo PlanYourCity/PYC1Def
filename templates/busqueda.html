@@ -2,7 +2,7 @@
 	{% block content %}
 		
 		<h3>Buscar {{ categ }}</h3>
-		<form action="{% url 'core.views.buscar' categ %}" method="POST" class="float_items">
+		<form action="{% url 'core.views.buscar' categ page %}" method="POST" class="float_items">
 			<div class="float_items">
 				<label class="campo">Título:</label>
 				<div class="campo_rellenar">

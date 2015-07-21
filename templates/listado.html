@@ -76,6 +76,26 @@
 			{% endfor %}
 		{% endifequal %}
 
-		<br></br>
+		{% if record|length == 0 %}
+			<h4 id="sin_resultados">Ningún resultado coincide con su búsqueda</h4>
+		{% endif %}
+
+
+		<div class="pagination">
+		    <span class="step-links">
+		        {% if record.has_previous %}
+		            <a id="prev" href="{% url 'core.views.buscar' categoria record.previous_page_number %}">Anterior</a>
+		        {% endif %}
+
+		        <span class="current">
+		            Página {{ record.number }} de {{ record.paginator.num_pages }}
+		        </span>
+
+		        {% if record.has_next %}
+		            <a id="next" href="{% url 'core.views.buscar' categoria record.next_page_number %}">Siguiente</a>
+		        {% endif %}
+		    </span>
+		</div>
+
 	{% endblock %}
 

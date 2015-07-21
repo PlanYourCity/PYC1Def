@@ -29,7 +29,8 @@ urlpatterns = [
     	url(r'listado/$', coreviews.lista_eventos),
 	    url(r'^detalle/(?P<titulo>.+)/$', coreviews.detalle),
         url(r'^ofertar/(?P<categoria>.+)/$', coreviews.ofertar),
-        url(r'^buscar/(?P<categoria>.+)/$', coreviews.buscar),
+        url(r'^buscar/(?P<categoria>.+)/(?P<page>[0-9]+)/$', coreviews.buscar),
+        url(r'^buscar/(?P<categoria>.+)/$', coreviews.menu_buscar),
         url(r'^calendario', coreviews.calendario),
         url(r'^misactividades', coreviews.misactividades),
 ]
