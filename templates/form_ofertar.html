@@ -78,7 +78,7 @@
 				<label class="campo">
 					Dirección:
 				</label>
-				<input class="entrada campo_rellenar" type="text" name="Direccion" value=""/>
+				<input class="entrada campo_rellenar" type="text" name="Direccion" placeholder="Calle, numero, ciudad" value=""/>
 				<label class="msgError"></label>
 			</div>
 			<div class="float_items">
@@ -97,14 +97,15 @@
 			{% ifequal categoria "ocio" %}
 				<div class="float_items">
 					<label class="campo">Precio (€):</label>
-					<input class="entrada campo_rellenar" type="number" name="Precio" value=""/>
+					<input class="entrada campo_rellenar" type="number" name="Precio" min="0" value="0"/>
 					<label class="msgError"></label>
 				</div>
 				<div class="float_items">
 					<label class="campo">Aforo:</label>
-					<input class="entrada campo_rellenar" type="number" name="Aforo_Max" value="" placeholder="Cantidad máxima de personas"/>
+					<input class="entrada campo_rellenar" type="number" name="Aforo_Max" min="0" value="0"/>
 					<label class="msgError"></label>
 				</div>
+				<!--
 				<div class="float_items">
 					<label class="campo">Fecha:</label>
 					<input type="date" class="datepicker entrada campo_rellenar" name="Fecha"/>
@@ -112,13 +113,15 @@
 				</div>
 				<div class="float_items">
 					<label class="campo">Hora:</label>
-					<input class="entrada campo_rellenar" type="text" name="Hora" value="" placeholder="HH:MM"/>	
+					<input class="entrada campo_rellenar" type="time" name="Hora" value=""/>	
 					<label class="msgError"></label>
 				</div>
+				
 				<div class="float_items">
 					<label class="campo">Imagen:</label>
 					<input class="entrada campo_rellenar" type="file" name="Imagen">
 				</div>
+				-->
 			{% endifequal %}
 
 
@@ -141,10 +144,12 @@
 						<input type="radio" name="TipoOferta" value="venta"> Venta
 					</div>
 				</div>
+				<!--
 				<div class="float_items">
 					<label class="campo">Imagen:</label>
 					<input class="entrada campo_rellenar" type="file" name="Imagen">
 				</div>
+				-->
 			{% endifequal %}
 
 
@@ -174,6 +179,25 @@
 				</div>
 			{% endifequal %}
 
+			<div class="float_items">
+				<label class="campo">Fecha:</label>
+				<input type="date" class="datepicker entrada campo_rellenar" name="Fecha"/>
+				<label class="msgError"></label>
+			</div>
+			<div class="float_items">
+				<label class="campo">Hora:</label>
+				<input class="entrada campo_rellenar" type="time" name="Hora" value=""/>	
+				<label class="msgError"></label>
+			</div>	
+
+			<div class="float_items">
+				{% ifequal categoria "empleo" %}
+				<label class="campo">Logotipo de empresa:</label>
+				{% else %}
+				<label class="campo">Imagen:</label>
+				{% endifequal %}
+				<input class="entrada campo_rellenar" type="file" name="Imagen">
+			</div>
 
 			<div class="float_items">
 				<button id="buttonForm" class="boton_formulario">Confirmar</button>
