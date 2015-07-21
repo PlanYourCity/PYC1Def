@@ -3,6 +3,9 @@
 <head>
 	<title>Plan Your City - Login</title>
 	<meta charset="UTF-8">
+	<link rel="stylesheet" href="/static/css/plugin/material.min.css">
+	<script src="/static/js/plugin/material.min.js"></script>
+	
 	<link href="../static/css/style_login.css" rel="stylesheet" type="text/css">
 	<script type="text/javascript" src="../static/js/login.js"></script>
 	<script src="https://apis.google.com/js/platform.js" async defer></script>
@@ -10,31 +13,44 @@
 
 <body>
 	<div id="main">
-		<h1 id="title">Plan Your City</h1>
-		<div id="login">
-			<h3 id="login-title">Log In</h3>
-			<div id="login-content">
-				<p>Conéctate a través de tu cuenta de Google+:</p>
+		<div class="mdl-card mdl-shadow--2dp demo-card-wide">
+			<div class="mdl-card__actions mdl-card--border">
+				<div id="google-button">
+					<h3>Plan Your City</h3>
+				</div>
+			</div>
+			<div class="mdl-card__title">
+				<h2 class="mdl-card__title-text">Bienvenido</h2>
+			</div>
+			<div class="mdl-card__supporting-text">
+				<p id="nota">Nota: Para usar nuestra aplicación necesitas una cuenta de Google+. Puedes crearte una <a href="https://accounts.google.com/signup?hl=es">aquí</a>.</p>
+			</div>
+			<div class="mdl-card__actions mdl-card--border">
 				<div id="google-button">
 					{% if user and not user.is_anonymous %}
-						<meta http-equiv="refresh" content="0; url=http://localhost:8000/index" />
+					<meta http-equiv="refresh" content="0; url=http://localhost:8000/index" />
 					{% else %}
 					<div id="customBtn" onclick="signInGoogle()" class="customGPlusSignIn">
-   						<span class="icon"></span>
-    					<span class="buttonText">Google+</span>
-    					<script>
+						<span class="icon"></span>
+						<span class="buttonText">Google+</span>
+						<script>
 							function signInGoogle() {
-							    window.location.assign("{% url 'social:begin' 'google-oauth2' %}?next={{request.path}}index/");
+								window.location.assign("{% url 'social:begin' 'google-oauth2' %}?next={{request.path}}index/");
 							}
 						</script>
 
-  					</div>
+					</div>
 					{% endif %}
 				</div>
-				<p id="nota">Nota: Para usar nuestra aplicación necesitas una cuenta de Google+. Puedes crearte una <a href="https://accounts.google.com/signup?hl=es">aquí</a>.</p>
 			</div>
 		</div>
 	</div>
+
+
+
+
+
+
 
 </body>
 

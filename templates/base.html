@@ -1,7 +1,12 @@
 <!DOCTYPE html>
 <html>
-	<title>Plan Your City</title>	
-<head>			
+<title>Plan Your City</title>	
+<head>
+	<link rel="stylesheet" href="/static/css/plugin/material.min.css">
+	<script src="/static/js/plugin/material.min.js"></script>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+	<!--
 	<link rel="stylesheet" type="text/css" href="/static/css/style.css">
 	<link rel="stylesheet" type="text/css" href="/static/css/style_listing.css">
 	<link rel="stylesheet" type="text/css" href="/static/css/stylesheet_detalle.css">
@@ -12,15 +17,64 @@
 	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
-	<!--CSS PARA CONSTRUCCION-->
-	<link rel="stylesheet" type="text/css" href="/static/css/style_building.css">
+    <!--CSS PARA CONSTRUCCION-->
+    <link rel="stylesheet" type="text/css" href="/static/css/style_building.css">
 
-	<script src="http://maps.googleapis.com/maps/api/js"></script>
+    <script src="http://maps.googleapis.com/maps/api/js"></script>
 
-	<meta charset="utf-8">
+    <meta charset="utf-8">
 </head>
 <body>
-	<div id="menuLateral" class="btn-group-vertical navbar-default" role="group">
+
+<!-- The drawer is always open in large screens. The header is always shown,
+  even in small screens. -->
+<div class="demo-layout">
+  <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer
+              mdl-layout--fixed-header">
+
+    <header class="mdl-layout__header">
+      <div class="mdl-layout__header-row">
+      <div class="mdl-layout-spacer"></div>
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable
+                  mdl-textfield--floating-label mdl-textfield--align-right">
+        <label class="mdl-button mdl-js-button mdl-button--icon"
+               for="fixed-header-drawer-exp">
+          <i class="material-icons">srch</i>
+        </label>
+        <div class="mdl-textfield__expandable-holder">
+        <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
+			for="demo-menu-lower-right">
+			<a href="http://localhost:8000/listado/"><li class="mdl-menu__item">Eventos creados</li></a>
+			<a type="button" href="{% url 'auth:logout' %}?next={{ request.path }}"><li class="mdl-menu__item">Logout</li></a>
+		</ul>
+          <input class="mdl-textfield__input" type="text" name="sample"
+                 id="fixed-header-drawer-exp" />
+        </div>
+      </div>
+    </div>
+    </header>
+    <div class="mdl-layout__drawer">
+      <span class="mdl-layout-title">Menú:</span>
+       <nav class="mdl-navigation">
+	      	<a class="mdl-navigation__link" href="http://localhost:8000/misactividades">Calendario</a>
+	      	<span class="label_menu_lateral">Buscar</span>
+	      	<a class="mdl-navigation__link" href="http://localhost:8000/buscar/ocio/">Ocio</a>
+	      	<a class="mdl-navigation__link" href="http://localhost:8000/buscar/vivienda/">Vivienda</a>
+	      	<a class="mdl-navigation__link" href="http://localhost:8000/buscar/empleo/">Empleo</a>
+	      	<span class="label_menu_lateral">Ofertar</span>
+	      	<a class="mdl-navigation__link" href="http://localhost:8000/ofertar/ocio/">Ocio</a>
+	      	<a class="mdl-navigation__link" href="http://localhost:8000/ofertar/vivienda/">Vivienda</a>
+	      	<a class="mdl-navigation__link" href="http://localhost:8000/ofertar/empleo/">Empleo</a>
+	      </nav>
+    </div>
+    <main class="mdl-layout__content">
+      <div class="page-content"><!-- Your content goes here --></div>
+    </main>
+  </div>
+</div>
+
+	<!--
+		<div id="menuLateral" class="btn-group-vertical navbar-default" role="group">
 
 		<div class="row calendario">
 			<div class=".col-lg-12 boton btn btn-primary btn-lg">
@@ -83,24 +137,83 @@
 		<div id="footer" class="row">
 				<p>Copyright &copy; Plain Your City 2015</p>
 		</div>
+	</div> -->
+	<!-- The drawer is always open in large screens. The header is always shown,
+	even in small screens. -->
+	<!--
+	<div class="demo-layout">
+		<div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer
+		mdl-layout--fixed-header">
+		<header class="mdl-layout__header">
+			<div class="mdl-layout__header-row">
+				<span>Plan Your City</span>
+				<div class="mdl-layout-spacer"></div>
+				<div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable
+				mdl-textfield--floating-label mdl-textfield--align-right">
+
+
+
+
+
+				<button id="demo-menu-lower-right"
+				class="mdl-button mdl-js-button mdl-button--icon">
+
+				<div class="material-icons mdl-badge">account_box</div>
+			</button>
+			</div>
+			<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
+			for="demo-menu-lower-right">
+			<a href="http://localhost:8000/listado/"><li class="mdl-menu__item">Eventos creados</li></a>
+			<a type="button" href="{% url 'auth:logout' %}?next={{ request.path }}"><li class="mdl-menu__item">Logout</li></a>
+		</ul>
+		<div class="mdl-textfield__expandable-holder">
+
+		</div>
 	</div>
 
-	<!--Llamadas a scripts-->
-	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>   	  	
-	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
-	<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="/static/js/plugin/alertify.min.js"></script>
-	<script type="text/javascript" src="/static/js/plugin/jquery.numeric.js"></script>
-	<script type="text/javascript" src="/static/js/botonEvento.js"></script>
-	<script type="text/javascript" src="/static/js/formBusqueda.js"></script>
-	<script type="text/javascript" src="/static/js/submenus.js"></script>
-	<script type="text/javascript" src="/static/js/funcSubmenus.js"></script>
-	<script type="text/javascript" src="/static/js/ofertar.js"></script>
-	<script type="text/javascript" src="/static/js/hoverBoton.js"></script>
-	<script type="text/javascript" src="/static/js/submitOfertar.js"></script>
-	<script type="text/javascript" src="/static/js/sigueme.js"></script>
+</div>
+</header>
+<div class="mdl-layout__drawer">
+	<span class="mdl-layout-title">Menú:</span>
+	   <a class="mdl-layout-title mdl-navigation__link" href="">Calendario</a>
+	      <a class="mdl-layout-title mdl-navigation__link" >Buscar</a>
+	      <a class="mdl-layout-title mdl-navigation__link" href="">Ofertar</a>
+	      <nav class="mdl-navigation">
+	      	<a class="mdl-navigation__link" href="http://localhost:8000/misactividades">Calendario</a>
+	      	<span class="label_menu_lateral">Buscar</span>
+	      	<a class="mdl-navigation__link" href="http://localhost:8000/buscar/ocio/">Ocio</a>
+	      	<a class="mdl-navigation__link" href="http://localhost:8000/buscar/vivienda/">Vivienda</a>
+	      	<a class="mdl-navigation__link" href="http://localhost:8000/buscar/empleo/">Empleo</a>
+	      	<span class="label_menu_lateral">Ofertar</span>
+	      	<a class="mdl-navigation__link" href="http://localhost:8000/ofertar/ocio/">Ocio</a>
+	      	<a class="mdl-navigation__link" href="http://localhost:8000/ofertar/vivienda/">Vivienda</a>
+	      	<a class="mdl-navigation__link" href="http://localhost:8000/ofertar/empleo/">Empleo</a>
+	      </nav>
+	      <main class="mdl-layout__content">
+	      	<div class="page-content"><!-- Your content goes here </div>
+	      </main>
+
+	  </div>
+
+	</div>
+</div>-->
+
+</body>
+
+<!--Llamadas a scripts-->
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>   	  	
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/static/js/plugin/alertify.min.js"></script>
+<script type="text/javascript" src="/static/js/botonEvento.js"></script>
+<script type="text/javascript" src="/static/js/formBusqueda.js"></script>
+<script type="text/javascript" src="/static/js/submenus.js"></script>
+<script type="text/javascript" src="/static/js/funcSubmenus.js"></script>
+<script type="text/javascript" src="/static/js/ofertar.js"></script>
+<script type="text/javascript" src="/static/js/hoverBoton.js"></script>
+<script type="text/javascript" src="/static/js/submitOfertar.js"></script>
+<script type="text/javascript" src="/static/js/sigueme.js"></script>
 </html>
 
 
 
-               

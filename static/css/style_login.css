@@ -10,6 +10,7 @@ html, body {
 #main {
 	width: 90%;
 	margin: 0 auto;
+	padding-top: 5%;
 }
 
 #title {
@@ -20,7 +21,6 @@ html, body {
 
 #login {
 	width: 60%;
-	margin: 5% auto;
 	font-size: 20px;
 	overflow: visible;
 	background-color: #fff;
@@ -31,7 +31,6 @@ html, body {
 }
 
 #login-title {
-	padding: 4%;
 	margin: 0 auto;
 	vertical-align: middle;
 	text-align: center;
@@ -41,13 +40,9 @@ html, body {
 	font-family: Babaca !important;
 }
 
-#login-content {
-	padding: 2%;
-}
-
 #google-button {
 	text-align: center;
-	padding: 2%;
+	padding: 1%;
 	margin: auto;
 }
 
@@ -81,4 +76,17 @@ span.icon {
 span.buttonText {
 	vertical-align: middle;
 	padding-left: 20px;
+}
+
+.demo-card-wide.mdl-card {
+	margin: 0 auto;
+	width: 512px;
+}
+.demo-card-wide > .mdl-card__title {
+	color: #fff;
+	height: 176px;
+	background: url('../images/login_image.jpg') center / cover;
+}
+.demo-card-wide > .mdl-card__menu {
+	color: #fff;
 }
