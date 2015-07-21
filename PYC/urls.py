@@ -26,12 +26,12 @@ urlpatterns = [
         url(r'home/$', coreviews.home),
         url('', include('social.apps.django_app.urls', namespace='social')),
         url('', include('django.contrib.auth.urls', namespace='auth')),
-    	url(r'listado/$', coreviews.lista_eventos),
+    	url(r'listado/$', coreviews.lista_eventos_creados),
 	    url(r'^detalle/(?P<titulo>.+)/$', coreviews.detalle),
         url(r'^ofertar/(?P<categoria>.+)/$', coreviews.ofertar),
         url(r'^buscar/(?P<categoria>.+)/$', coreviews.buscar),
         url(r'^calendario', coreviews.calendario),
-        url(r'^misactividades', coreviews.misactividades),
+        url(r'^misactividades', coreviews.misactividades_seguidas),
 ]
 
 

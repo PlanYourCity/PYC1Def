@@ -15,8 +15,6 @@ from django.contrib.auth.decorators import login_required
 
 import json
 
-# Create your views here.
-#def Detalles(request):
 
 def home(request):
    return render(request, 'home.html')
@@ -24,11 +22,10 @@ def home(request):
 @login_required
 def inicio(request):
 	return render(request, 'base.html')
-	#template = get_template("base.html")				
-	#return HttpResponse(template.render(Context()))	
+
 
 @login_required
-def lista_eventos(request):
+def lista_eventos_creados(request):
 
 	if request.user.is_authenticated():
 		if request.method == "GET":
@@ -79,7 +76,7 @@ def lista_eventos(request):
 			return HttpResponseRedirect("listado/")
 
 @login_required
-def misactividades(request):
+def misactividades_seguidas(request):
 
 	if request.user.is_authenticated():
 		if request.method=="GET":
@@ -265,12 +262,7 @@ def ofertar(request,categoria):
 				response = {'message': True}			
 			#return HttpResponseRedirect("/ofertar/empleo")
 			return HttpResponse(json.dumps(response), content_type="application/json")
-		#else
-			#except:
-			#canal="<h1> la url del canal introducido no es valida</h1>"
-			#template = get_template("configurar_canales.html")
-			#diccionario = {'css_user':css,'usuario':enlace,'canal':canal}
-			#return HttpResponse(template.render(Context(diccionario)))
+
 
 @login_required
 def buscar(request,categoria):
@@ -310,6 +302,8 @@ def buscar(request,categoria):
 			if direc != "":
 				record=record.filter(Direccion__contains=direc)
 
+			record=record.filter().exclude(Usuario_owner=request.user)
+
 			if record != []:
 				template = get_template("listado.html")		
 				diccionario = {'record':record,'categoria':categoria, 'request':request}	
@@ -341,6 +335,8 @@ def buscar(request,categoria):
 				record=record.filter(NumHab=numHab)
 			if direc != "":
 				record=record.filter(Direccion__contains=direc)
+
+			record=record.filter().exclude(Usuario_owner=request.user)
 	
 			if record != []:
 				template = get_template("listado.html")		
@@ -367,6 +363,8 @@ def buscar(request,categoria):
 				record=record.filter(Sueldo=sueldo)
 			if periodo != "":
 				record=record.filter(Periodo=periodo)
+
+			record=record.filter().exclude(Usuario_owner=request.user)
 		
 			if record != []:
 				template = get_template("listado.html")		
