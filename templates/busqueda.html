@@ -2,12 +2,13 @@
 	{% block content %}
 		
 		<h3>Buscar {{ categ }}</h3>
-		<form action="{% url 'core.views.buscar' categ page %}" method="POST" class="float_items">
+
+		<form id="formBuscar" action="{% url 'core.views.buscar' categ page %}" method="POST" class="float_items">
+
 			<div class="float_items">
 				<label class="campo">Título:</label>
-				<div class="campo_rellenar">
-					<input class="entrada" type="text" name="titulo">
-				</div>
+				<input class="entrada campo_rellenar" type="text" name="titulo">
+				<label class="msgError"></label>
 			</div>
 			<div class="float_items">
 				<label class="campo">Ciudad:</label>
@@ -72,17 +73,15 @@
 	        </div> 
 			<div class="float_items">
 				<label class="campo">Dirección:</label>
-				<div class="campo_rellenar">
-					<input type="text" name="direccion" class="entrada" placeholder="Calle, numero, ciudad">
-				</div>
+				<input type="text" name="direccion" class="entrada campo_rellenar" placeholder="Calle, numero, ciudad">
+				<label class="msgError"></label>
 			</div>
 
 			{% ifequal categ "empleo" %}
 				<div class="float_items">
 					<label class="campo">Sueldo:</label>
-					<div class="campo_rellenar">
-						<input type="number" class="entrada" name="sueldo">
-					</div>
+					<input type="number" class="entrada campo_rellenar" name="sueldo" min="0" value="0">
+					<label class="msgError"></label>
 				</div>
 				<!--
 				<div id="slideSueldo"></div>
@@ -92,9 +91,8 @@
 			{% else %}
 				<div class="float_items">
 					<label class="campo">Precio:</label>
-					<div class="campo_rellenar">
-						<input type="number" class="entrada" name="precio">
-					</div>
+					<input type="number" class="entrada campo_rellenar" name="precio" min="0" value="0">
+					<label class="msgError"></label>
 				</div>
 			{% endifequal %}
 
@@ -102,8 +100,12 @@
 				<div class="float_items">
 					<label class="campo">Desde</label>
 					<input type="date" class="datepicker" class="campo_rellenar" name="fDesde">
-					<label id="label_hasta_busqueda">Hasta</label>
-					<input type="date" class="datepicker" class="campo_rellenar" name="fHasta">
+					<label class="msgError"></label>
+				</div>
+				<div class="float_items">
+					<label class="campo">Hasta</label>
+					<input type="date" class="datepicker" class="campo_rellenar" name="fHasta">				
+					<label class="msgError"></label>
 				</div>
 			{% endifequal %}
 			{% ifequal categ "empleo" %}
@@ -125,17 +127,15 @@
 			{% ifequal categ  "ocio" %}
 				<div class="float_items">
 					<label class="campo">Aforo máximo:</label>
-					<div class="campo_rellenar">
-						<input type="number" class="entrada" name="aMax">
-					</div>
+					<input type="number" class="entrada campo_rellenar" name="aMax" min="0" value="0">
+					<label class="msgError"></label>
 				</div>
 			{% endifequal %}
 			{% ifequal categ "vivienda" %}
 				<div class="float_items">
 					<label class="campo">Nº habitaciones</label>
-					<div class="campo_rellenar">
-						<input type="number" class="entrada" name="nHabit">
-					</div>
+					<input type="number" class="entrada campo_rellenar" name="nHabit" min="0" value="0">
+					<label class="msgError"></label>
 				</div>
 				<div class="float_items">
 					<label class="campo">Tipo:</label>
@@ -146,7 +146,8 @@
 				</div>
 			{% endifequal%}
 
-			<input type="submit" value="Buscar" class="boton_formulario">
+			<!--<input type="submit" value="Buscar" class="boton_formulario">-->
+			<button class="boton_formulario">Buscar</button>
 			<input type="reset" class="boton_formulario" onclick="return confirm('¿Seguro que quieres restablecer el formulario?')"/>
 		</form>
 
