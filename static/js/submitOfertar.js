@@ -1,24 +1,44 @@
 $('document').ready(function(){
 
 	/*VALIDACION CAMPO DE TEXTO*/
-	function caracteresEspeciales(valInput, name){
+	function caracteresEspeciales(valInput, name, type){
  		var regex = /[\$\%\&\(\)\=\¿\?\*\^\{\}\_\-\"\'\<\>]/g;
 
  		if(regex.test(valInput)){
- 			$('#formOfertar input[name="'+name+'"] ~ .msgError').text("* Campo erroneo");
-			$('#formOfertar input[name="'+name+'"]').css('box-shadow','0px 0px 5px red');
-			$('#formOfertar input[name="'+name+'"] ~ .msgError').animate({
-				opacity: 1
-			}, 
-			1000);
+ 			if(type == "textarea"){
+ 				$('textarea ~ .msgError').text("* Campo erroneo");
+				$('textarea').css('box-shadow','0px 0px 5px red');
+				$('textarea ~ .msgError').animate({
+					opacity: 1
+				}, 
+				1000);
+ 			}else{
+	 			$('#formOfertar input[name="'+name+'"] ~ .msgError').text("* Campo erroneo");
+				$('#formOfertar input[name="'+name+'"]').css('box-shadow','0px 0px 5px red');
+				$('#formOfertar input[name="'+name+'"] ~ .msgError').animate({
+					opacity: 1
+				}, 
+				1000);
+			}
+
  		}else{
- 			$('#formOfertar input[name="'+name+'"]').css('box-shadow','0px 0px 0px red');
-			$('#formOfertar input[name="'+name+'"] ~ .msgError').animate({
-				opacity: 0
-			}, 
-			1000,
-			function(){$('#formOfertar input[name="'+name+'"] ~ .msgError').text("");}
-			);
+ 			if(type == "textarea"){
+ 				$('textarea').css('box-shadow','0px 0px 0px red');
+				$('textarea ~ .msgError').animate({
+					opacity: 0
+				}, 
+				1000,
+				function(){$('textarea ~ .msgError').text("");}
+				);
+ 			}else{
+	 			$('#formOfertar input[name="'+name+'"]').css('box-shadow','0px 0px 0px red');
+				$('#formOfertar input[name="'+name+'"] ~ .msgError').animate({
+					opacity: 0
+				}, 
+				1000,
+				function(){$('#formOfertar input[name="'+name+'"] ~ .msgError').text("");}
+				);
+			}
  		}
 
 	}
@@ -40,11 +60,16 @@ $('document').ready(function(){
 	}
 
 	/*EVENTO PARA COMPROBAR CAMPO*/
-	$('#formOfertar input').blur(function(){
+	$('#formOfertar input, textarea').blur(function(){
 		var valInput = $(this).val();
 		var name = $(this).attr("name");
+		var type = $(this).prop('tagName').toLowerCase();
 
-		campoVacio(valInput, name);
+		if(type == "input"){
+			campoVacio(valInput, name);
+		}else{
+			caracteresEspeciales(valInput, name, type)
+		}
 		
 	});
 
