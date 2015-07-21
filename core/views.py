@@ -109,16 +109,17 @@ def detalle(request, titulo):
 	Act_viv=ActVivienda.objects.all()
 	Act_Emp=ActEmpleo.objects.all() 
 
-	record = Usuario.objects.filter(User=request.user, ActSubscrita= titulo)
+	record = Usuario.objects.filter(User=request.user, Title= titulo)
 	if record:
 		siguiendo = "True"
 		print("ya se esta siguiendo")
 	else:
 		siguiendo = "False"
 
+	
+
 	if request.method=="GET":	
 		for i in Act_ocio:
-
 			if titulo==i.Titulo:
 
 				categoria="ocio"
@@ -130,9 +131,13 @@ def detalle(request, titulo):
 				Descri=i.Descripcion
 				Afor= i.Aforo_Max
 				fecha=i.Fecha
-				diccionario = {'categoria':categoria,'titulo':Tit,'imagen':Imag,'precio':Prec,'direccion':Dirr,'hora':Hour,'descripcion':Descri,'aforo':Afor,'fecha':fecha, 'request':request, 'siguiendo': siguiendo}
-		for i in Act_viv:
+				propietario=i.Usuario_owner
 
+				numUser = Usuario.objects.filter(Title=Tit).count()
+
+				diccionario = {'categoria':categoria,'titulo':Tit,'imagen':Imag,'precio':Prec,'direccion':Dirr,'hora':Hour,'descripcion':Descri,'aforo':Afor,'fecha':fecha,'propietario':propietario, 'request':request, 'siguiendo': siguiendo, 'numUser':numUser}
+
+		for i in Act_viv:
 			if titulo==i.Titulo:
 
 				categoria="vivienda"
@@ -143,7 +148,11 @@ def detalle(request, titulo):
 				num_habt=i.NumHab
 				Descri=i.Descripcion
 				Toferta= i.TipoOferta
-				diccionario = {'categoria':categoria,'titulo':Tit,'imagen':Imag,'precio':prec,'direccion':Dirr,'num_habt':num_habt,'descripcion':Descri,'Toferta':Toferta, 'request':request, 'siguiendo': siguiendo}		
+				propietario=i.Usuario_owner
+
+				numUser = Usuario.objects.filter(Title=Tit).count()
+
+				diccionario = {'categoria':categoria,'titulo':Tit,'imagen':Imag,'precio':prec,'direccion':Dirr,'num_habt':num_habt,'descripcion':Descri,'Toferta':Toferta,'propietario':propietario, 'request':request, 'siguiendo': siguiendo, 'numUser':numUser}		
 
 		for i in Act_Emp:
 			if titulo==i.Titulo:
@@ -155,10 +164,15 @@ def detalle(request, titulo):
 				Periodo=i.Periodo
 				Descri=i.Descripcion
 				Plazas= i.Plazas
-				diccionario = {'categoria':categoria,'titulo':Tit,'imagen':Imag,'Sueldo':Sueldo,'direccion':Dirr,'Periodo':Periodo,'descripcion':Descri,'Plazas':Plazas, 'request':request, 'siguiendo': siguiendo}		
+				propietario=i.Usuario_owner
+
+				numUser = Usuario.objects.filter(Title=Tit).count()
+
+				diccionario = {'categoria':categoria,'titulo':Tit,'imagen':Imag,'Sueldo':Sueldo,'direccion':Dirr,'Periodo':Periodo,'descripcion':Descri,'Plazas':Plazas,'propietario':propietario, 'request':request, 'siguiendo': siguiendo, 'numUser':numUser}		
 
 		template = get_template("detalle_ocio.html")	
-		return HttpResponse(template.render(Context(diccionario)))				
+		return HttpResponse(template.render(Context(diccionario)))	
+
 	elif request.method=="POST":
 
 		if request.POST['action'] == "follow":

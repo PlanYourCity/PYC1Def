@@ -138,14 +138,19 @@
 			<div class="white_box margin_top" id="description">
 				Descripción:&nbsp;{{descripcion}}
 			</div>
-			{% ifequal siguiendo "False" %}
+			{% ifequal propietario request.user %}
 				<div id="follow_me_button_div">
-					<button type="button" class="white_box margin_top" id="follow_me">¡Sígueme!</button>
-				</div>
+					<button type="button" class="white_box margin_top" id="Contador">Usuarios Siguiendo este evento: {{numUsers}}</button>
 			{% else %}
-				<div id="follow_me_button_div">
-					<button type="button" class="white_box margin_top" id="follow_me">Dejar de seguir</button>
-				</div>
+				{% ifequal siguiendo "False" %}
+					<div id="follow_me_button_div">
+						<button type="button" class="white_box margin_top" id="follow_me">¡Sígueme!</button>
+					</div>
+				{% else %}
+					<div id="follow_me_button_div">
+						<button type="button" class="white_box margin_top" id="follow_me">Dejar de seguir</button>
+					</div>
+				{% endifequal %}
 			{% endifequal %}
 		</div>
 	{% endblock %}
