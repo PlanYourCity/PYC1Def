@@ -40,7 +40,7 @@ $('document').ready(function(){
 	}
 
 	/*EVENTO PARA COMPROBAR CAMPO*/
-	$('input').blur(function(){
+	$('#formOfertar input').blur(function(){
 		var valInput = $(this).val();
 		var name = $(this).attr("name");
 
