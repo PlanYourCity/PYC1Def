@@ -1,4 +1,10 @@
 $('document').ready(function(){
+
+	if($('#follow_me').text() === "Dejar de seguir") {
+		$("#follow_me").animate({
+	  		backgroundColor: "red"
+	  	},0);
+	}
 	
 	$('#follow_me').click(function(e){
 
@@ -15,7 +21,6 @@ $('document').ready(function(){
 	}
 
 	datos+="&action="+action;
-
 	$.ajax({
 	  method: "POST",
 	  url: url,
