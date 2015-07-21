@@ -17,14 +17,8 @@
 				<p>Conéctate a través de tu cuenta de Google+:</p>
 				<div id="google-button">
 					{% if user and not user.is_anonymous %}
-					<li>
-						<a>Hello {{ user.get_full_name|default:user.username }}!</a>
-					</li>
-					<li>
-						<a href="{% url 'auth:logout' %}?next={{ request.path }}">Logout</a>
-					</li>
+						<meta http-equiv="refresh" content="0; url=http://localhost:8000/index" />
 					{% else %}
-
 					<div id="customBtn" onclick="signInGoogle()" class="customGPlusSignIn">
    						<span class="icon"></span>
     					<span class="buttonText">Google+</span>

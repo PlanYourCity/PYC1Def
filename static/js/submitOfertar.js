@@ -1,44 +1,82 @@
 $('document').ready(function(){
 
-	$('input[name="Direccion"]').blur(function(){
-		var value = $(this).val();
-		var regex = /[º\"\';]/g;
+	/*VALIDACION CAMPO DE TEXTO*/
+	function caracteresEspeciales(valInput, name){
+ 		var regex = /[\$\%\&\(\)\=\¿\?\*\^\{\}\_\-\"\'\<\>]/g;
 
-		var check = value.match(regex);
+ 		if(regex.test(valInput)){
+ 			$('input[name="'+name+'"] ~ label').text("* Campo erroneo");
+			$('input[name="'+name+'"]').css('box-shadow','0px 0px 5px red');
+			$('input[name="'+name+'"] ~ label').animate({
+				opacity: 1
+			}, 
+			1000);
+ 		}else{
+ 			$('input[name="'+name+'"]').css('box-shadow','0px 0px 0px red');
+			$('input[name="'+name+'"] ~ label').animate({
+				opacity: 0
+			}, 
+			1000,
+			function(){$('input[name="'+name+'"] ~ label').text("");}
+			);
+ 		}
 
-		if(check){
-			$('input[name="Direccion"] + span').fadeIn("slow", 2000);
+	}
+
+	/*VALIDACION DE CAMPO OBLIGATORIO*/
+	function campoVacio(valInput, name){
+		
+		if(valInput === ''){
+			$('input[name="'+name+'"] ~ label').text("* Campo requerido");
+			$('input[name="'+name+'"]').css('box-shadow','0px 0px 5px red');
+			$('input[name="'+name+'"] ~ label').animate({
+				opacity: 1
+			}, 
+			1000);
 		}else{
-			$('input[name="Direccion"] + span').fadeOut("slow", 5000);
+			caracteresEspeciales(valInput, name);
 		}
 
+	}
 
+	/*EVENTO PARA COMPROBAR CAMPO*/
+	$('input').blur(function(){
+		var valInput = $(this).val();
+		var name = $(this).attr("name");
+
+		campoVacio(valInput, name);
+		
 	});
 
 	$('#buttonForm').click(function(e){
 
-		var url = "/ofertar/"+$('input[type="hidden"]').val()+"/";
-		var img = "&Imagen="+$('input[type="file"]').val();
-		var datosForm = $('#formOfertar').serialize();
+		var error = $('.msgError').text();
 
-		$.ajax({
-		  method: "POST",
-		  url: url,
-		  data: datosForm+img,
-		  success: function(data){
-		  	if(data.message == true){
-		  		alertify.set('notifier','position','top-right');
-				alertify.success('¡¡Evento registrado!!');
-		  	}
-		  	else{
-		  		alertify.set('notifier','position','top-right');
-				alertify.error('¡¡El evento ya existe!!');
-		  	}
-		  }
-		});
+		if(error == ""){
+			var url = "/ofertar/"+$('input[type="hidden"]').val()+"/";
+			var img = "&Imagen="+$('input[type="file"]').val();
+			var datosForm = $('#formOfertar').serialize();
 
-		return false;		
-	
+			$.ajax({
+			  method: "POST",
+			  url: url,
+			  data: datosForm+img,
+			  success: function(data){
+			  	if(data.message == true){
+			  		alertify.set('notifier','position','top-right');
+					alertify.success('¡¡Evento registrado!!');
+			  	}
+			  	else{
+			  		alertify.set('notifier','position','top-right');
+					alertify.error('¡¡El evento ya existe!!');
+			  	}
+			  }
+			});
+
+			return false;
+		}
+
+		return false;	
 	});
 		
 });
