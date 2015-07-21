@@ -5,19 +5,19 @@ $('document').ready(function(){
  		var regex = /[\$\%\&\(\)\=\¿\?\*\^\{\}\_\-\"\'\<\>]/g;
 
  		if(regex.test(valInput)){
- 			$('input[name="'+name+'"] ~ label').text("* Campo erroneo");
-			$('input[name="'+name+'"]').css('box-shadow','0px 0px 5px red');
-			$('input[name="'+name+'"] ~ label').animate({
+ 			$('#formOfertar input[name="'+name+'"] ~ .msgError').text("* Campo erroneo");
+			$('#formOfertar input[name="'+name+'"]').css('box-shadow','0px 0px 5px red');
+			$('#formOfertar input[name="'+name+'"] ~ .msgError').animate({
 				opacity: 1
 			}, 
 			1000);
  		}else{
- 			$('input[name="'+name+'"]').css('box-shadow','0px 0px 0px red');
-			$('input[name="'+name+'"] ~ label').animate({
+ 			$('#formOfertar input[name="'+name+'"]').css('box-shadow','0px 0px 0px red');
+			$('#formOfertar input[name="'+name+'"] ~ .msgError').animate({
 				opacity: 0
 			}, 
 			1000,
-			function(){$('input[name="'+name+'"] ~ label').text("");}
+			function(){$('#formOfertar input[name="'+name+'"] ~ .msgError').text("");}
 			);
  		}
 
@@ -27,9 +27,9 @@ $('document').ready(function(){
 	function campoVacio(valInput, name){
 		
 		if(valInput === ''){
-			$('input[name="'+name+'"] ~ label').text("* Campo requerido");
-			$('input[name="'+name+'"]').css('box-shadow','0px 0px 5px red');
-			$('input[name="'+name+'"] ~ label').animate({
+			$('#formOfertar input[name="'+name+'"] ~ .msgError').text("* Campo requerido");
+			$('#formOfertar input[name="'+name+'"]').css('box-shadow','0px 0px 5px red');
+			$('#formOfertar input[name="'+name+'"] ~ .msgError').animate({
 				opacity: 1
 			}, 
 			1000);
