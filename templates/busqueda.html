@@ -80,7 +80,7 @@
 			{% ifequal categ "empleo" %}
 				<div class="float_items">
 					<label class="campo">Sueldo:</label>
-					<input type="number" class="entrada campo_rellenar" name="sueldo" min="0" value="0">
+					<input type="number" class="entrada campo_rellenar" name="sueldo" value="">
 					<label class="msgError"></label>
 				</div>
 				<!--
@@ -91,7 +91,7 @@
 			{% else %}
 				<div class="float_items">
 					<label class="campo">Precio:</label>
-					<input type="number" class="entrada campo_rellenar" name="precio" min="0" value="0">
+					<input type="number" class="entrada campo_rellenar" name="precio" value="">
 					<label class="msgError"></label>
 				</div>
 			{% endifequal %}
@@ -127,14 +127,14 @@
 			{% ifequal categ  "ocio" %}
 				<div class="float_items">
 					<label class="campo">Aforo máximo:</label>
-					<input type="number" class="entrada campo_rellenar" name="aMax" min="0" value="0">
+					<input type="number" class="entrada campo_rellenar" name="aMax" value="">
 					<label class="msgError"></label>
 				</div>
 			{% endifequal %}
 			{% ifequal categ "vivienda" %}
 				<div class="float_items">
 					<label class="campo">Nº habitaciones</label>
-					<input type="number" class="entrada campo_rellenar" name="nHabit" min="0" value="0">
+					<input type="number" class="entrada campo_rellenar" name="nHabit" value="">
 					<label class="msgError"></label>
 				</div>
 				<div class="float_items">
