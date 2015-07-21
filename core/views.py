@@ -87,19 +87,21 @@ def misactividades_seguidas(request):
 			record=Usuario.objects.filter(User=request.user)
 			for i in record:
 				if i.Categoria=="ocio":
-					record_ocio+=ActOcio.objects.filter(Titulo=i.ActSubscrita)
+					record_ocio+=ActOcio.objects.filter(Titulo=i.Title)
 				
 				elif i.Categoria=="vivienda":
-					record_viv+=ActVivienda.objects.filter(Titulo=i.ActSubscrita)
+					record_viv+=ActVivienda.objects.filter(Titulo=i.Title)
 
 				elif i.Categoria=="empleo":
-					record_emp+=ActEmpleo.objects.filter(Titulo=i.ActSubscrita)
+					record_emp+=ActEmpleo.objects.filter(Titulo=i.Title)
 	
 			template = get_template("Actividades_apuntadas.html")		
 			diccionario = {'record_ocio':record_ocio,'record_viv':record_viv,'record_emp':record_emp, 'request':request}
 			return HttpResponse(template.render(Context(diccionario)))
 		elif request.method=="POST":
 			return("Es un POST")
+
+
 @login_required
 def detalle(request, titulo):
 
@@ -109,7 +111,7 @@ def detalle(request, titulo):
 	Act_viv=ActVivienda.objects.all()
 	Act_Emp=ActEmpleo.objects.all() 
 
-	record = Usuario.objects.filter(User=request.user, ActSubscrita= titulo)
+	record = Usuario.objects.filter(User=request.user, Title= titulo)
 	if record:
 		siguiendo = "True"
 		print("ya se esta siguiendo")
@@ -169,10 +171,10 @@ def detalle(request, titulo):
 			titulo=request.POST['titulo']
 				# Guardar actividad usuario
 			try:
-				record=Usuario.objects.get(ActSubscrita=titulo)
+				record=Usuario.objects.get(Title=titulo)
 				response = {'message': False}
 			except:
-				Nueva_Actividad_user=Usuario(User=usuario,ActSubscrita=titulo,Categoria=categoria)
+				Nueva_Actividad_user=Usuario(User=usuario,Title=titulo,Categoria=categoria)
 				Nueva_Actividad_user.save()
 				response = {'message': True, 'siguiendo':True}
 				print("todo ha ido bien insertando")
@@ -184,7 +186,7 @@ def detalle(request, titulo):
 			titulo=request.POST['titulo']
 			# Guardar actividad usuario
 			try:
-				unfollowAct=Usuario.objects.filter(User=usuario,ActSubscrita=titulo)
+				unfollowAct=Usuario.objects.filter(User=usuario,Title=titulo)
 				unfollowAct.delete()
 				response = {'message': True, 'siguiendo':False}
 				print("todo ha ido bien borrando")
