@@ -1,0 +1,24 @@
+.label_menu_lateral {
+	padding-left: 1em;
+	font-size: 14px;
+}
+
+.opcion_menu_lateral {
+	font-size: 18px;
+}
+
+.opcion_boton_usuario {
+	text-decoration: none;
+}
+
+.icono_usuario {
+	color:white;
+	text-align: center;
+	font-size: 40px;
+}
+
+.icono_menu {
+	text-align: left;
+	padding-right: 1em;
+	vertical-align: middle;
+}
