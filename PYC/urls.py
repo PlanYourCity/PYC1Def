@@ -22,7 +22,6 @@ urlpatterns = [
     	url(r'^admin/', include(admin.site.urls)),
         url(r'index/', coreviews.inicio),
         url(r'^$', 'core.views.home', name='home'),
-
         url(r'home/$', coreviews.home),
         url('', include('social.apps.django_app.urls', namespace='social')),
         url('', include('django.contrib.auth.urls', namespace='auth')),
@@ -32,6 +31,7 @@ urlpatterns = [
         url(r'^buscar/(?P<categoria>.+)/$', coreviews.buscar),
         url(r'^calendario', coreviews.calendario),
         url(r'^misactividades', coreviews.misactividades),
+        url(r'^all_events/', coreviews.all_events),
 ]
 
 

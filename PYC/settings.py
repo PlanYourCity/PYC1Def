@@ -12,11 +12,16 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+import sys
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 MAIN_DIR = os.path.dirname(os.path.dirname(__file__))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
+
+FULLCALENDAR_FOLDER = os.path.abspath(os.path.join(BASE_DIR, '..', '..', 'django-fullcalendar'))
+if FULLCALENDAR_FOLDER not in sys.path:    
+    sys.path.insert(0, FULLCALENDAR_FOLDER)
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'e2bm3*@(7$vlxm0m1c_bj@6)dg1ppizhp2mp9b#3#^+p_32@h$'
@@ -42,6 +47,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'core',
+    'fullcalendar',
     'social.apps.django_app.default',
 )
 

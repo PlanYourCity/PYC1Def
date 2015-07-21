@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.translation import ugettext_lazy as _
 
 # Create your models here.
 
@@ -39,7 +40,17 @@ class ActEmpleo(models.Model):
 
 
 class Usuario(models.Model):
+	title=models.CharField(_('Title'), blank=True, max_length=200)
+	start=models.DateTimeField(_('Start'))
+	end=models.DateTimeField(_('End'))
+	all_day=models.BooleanField(_('All day'), default=False)
 	User=models.CharField(max_length=100)	
-	ActSubscrita=models.CharField(max_length=300)
 	Categoria=models.CharField(max_length=15)
+	
+	class Meta:
+		verbose_name = _('Event')
+		verbose_name_plural = _('Events')
+
+		def __unicode__(self):
+			return self.title
 
