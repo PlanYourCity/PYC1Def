@@ -104,17 +104,14 @@
 
 #next,
 #prev {
-    color: #333;
-    display: inline-block;
+    color: #337AB7;
     font: normal bold 1em Arial,sans-serif;
     overflow: hidden;
     position: relative;
     text-decoration: none;
     width: auto;
+    padding: 0em 1.5em
 }
-
-#next,
-#prev { padding: 0em 1.5em }
 
 #next { text-align: right }
 
@@ -122,7 +119,7 @@
 #next:after,
 #prev:before,
 #prev:after {
-    background: #333;
+    background: #337AB7;
     border-radius: 0.25em;
     content: "";
     display: block;
@@ -152,7 +149,7 @@
 #next:hover,
 #next:focus,
 #prev:hover,
-#prev:focus { color: #c00 }
+#prev:focus { color: #2E6DA4 }
 
 #next:hover:before,
 #next:hover:after,
@@ -161,5 +158,5 @@
 #prev:hover:before,
 #prev:hover:after,
 #prev:focus:before,
-#prev:focus:after { background: #c00 }
+#prev:focus:after { background: #2E6DA4 }
 
