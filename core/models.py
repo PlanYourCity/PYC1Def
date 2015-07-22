@@ -43,6 +43,11 @@ class ActEmpleo(models.Model):
 	Usuario_owner=models.CharField(max_length=200)
 
 
+#class Usuario(models.Model):
+#	User=models.CharField(max_length=100)	
+#	ActSubscrita=models.CharField(max_length=300)
+#	Categoria=models.CharField(max_length=15)
+
 class Usuario(models.Model):
 	title=models.CharField(_('Title'), blank=True, max_length=200)
 	start=models.DateTimeField(_('Start'),null=True)

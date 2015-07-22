@@ -126,12 +126,16 @@ def misactividades_seguidas(request):
 
 				elif i.Categoria=="empleo":
 					record_emp+=ActEmpleo.objects.filter(Titulo=i.title)
+
+
 	
 			template = get_template("Actividades_apuntadas.html")		
 			diccionario = {'record_ocio':record_ocio,'record_viv':record_viv,'record_emp':record_emp, 'request':request}
 			return HttpResponse(template.render(Context(diccionario)))
 		elif request.method=="POST":
 			return("Es un POST")
+
+
 @login_required
 def detalle(request, titulo):
 
@@ -147,9 +151,10 @@ def detalle(request, titulo):
 	else:
 		siguiendo = "False"
 
+	
+
 	if request.method=="GET":	
 		for i in Act_ocio:
-
 			if titulo==i.Titulo:
 
 				categoria="ocio"
@@ -161,9 +166,16 @@ def detalle(request, titulo):
 				Descri=i.Descripcion
 				Afor= i.Aforo_Max
 				fecha=i.Fecha
-				diccionario = {'categoria':categoria,'titulo':Tit,'imagen':Imag,'precio':Prec,'direccion':Dirr,'hora':Hour,'descripcion':Descri,'aforo':Afor,'fecha':fecha, 'request':request, 'siguiendo': siguiendo}
-		for i in Act_viv:
+				propietario=str(i.Usuario_owner)
+				user=str(request.user)
 
+				numUser = Usuario.objects.filter(Title=Tit).count()
+				if not numUser:
+					numUser = "0"
+
+				diccionario = {'categoria':categoria,'titulo':Tit,'imagen':Imag,'precio':Prec,'direccion':Dirr,'hora':Hour,'descripcion':Descri,'aforo':Afor,'fecha':fecha,'propietario':propietario, 'user':user, 'siguiendo': siguiendo, 'numUser':numUser}
+
+		for i in Act_viv:
 			if titulo==i.Titulo:
 
 				categoria="vivienda"
@@ -174,7 +186,14 @@ def detalle(request, titulo):
 				num_habt=i.NumHab
 				Descri=i.Descripcion
 				Toferta= i.TipoOferta
-				diccionario = {'categoria':categoria,'titulo':Tit,'imagen':Imag,'precio':prec,'direccion':Dirr,'num_habt':num_habt,'descripcion':Descri,'Toferta':Toferta, 'request':request, 'siguiendo': siguiendo}		
+				propietario=str(i.Usuario_owner)
+				user=str(request.user)
+
+				numUser = Usuario.objects.filter(Title=Tit).count()
+				if not numUser:
+					numUser = "0"
+
+				diccionario = {'categoria':categoria,'titulo':Tit,'imagen':Imag,'precio':prec,'direccion':Dirr,'num_habt':num_habt,'descripcion':Descri,'Toferta':Toferta,'propietario':propietario, 'user':user, 'siguiendo': siguiendo, 'numUser':numUser}		
 
 		for i in Act_Emp:
 			if titulo==i.Titulo:
@@ -186,10 +205,18 @@ def detalle(request, titulo):
 				Periodo=i.Periodo
 				Descri=i.Descripcion
 				Plazas= i.Plazas
-				diccionario = {'categoria':categoria,'titulo':Tit,'imagen':Imag,'Sueldo':Sueldo,'direccion':Dirr,'Periodo':Periodo,'descripcion':Descri,'Plazas':Plazas, 'request':request, 'siguiendo': siguiendo}		
+				propietario=str(i.Usuario_owner)
+				user=str(request.user)
+
+				numUser = Usuario.objects.filter(Title=Tit).count()
+				if not numUser:
+					numUser = "0"
+
+				diccionario = {'categoria':categoria,'titulo':Tit,'imagen':Imag,'Sueldo':Sueldo,'direccion':Dirr,'Periodo':Periodo,'descripcion':Descri,'Plazas':Plazas,'propietario':propietario, 'user':user, 'siguiendo': siguiendo, 'numUser':numUser}		
 
 		template = get_template("detalle_ocio.html")	
-		return HttpResponse(template.render(Context(diccionario)))				
+		return HttpResponse(template.render(Context(diccionario)))	
+
 	elif request.method=="POST":
 		Fech=""
 		if request.POST['action'] == "follow":
@@ -213,6 +240,7 @@ def detalle(request, titulo):
 				hora=Activ_emp.Hora
 
 			try:
+
 				record=Usuario.objects.get(title=titulo)
 				response = {'message': False}
 			except:
@@ -226,8 +254,6 @@ def detalle(request, titulo):
 				fecha_comp=fecha+" "+hora
 				Nueva_Actividad_user=Usuario(title=titulo,start=fecha_comp,end=fecha_comp,User=usuario,Categoria=categoria)
 				Nueva_Actividad_user.save()
-				#Nueva_Actividad_user=Usuario(User=usuario,title=titulo,Categoria=categoria)
-				#Nueva_Actividad_user.save()
 				response = {'message': True, 'siguiendo':True}
 				print("todo ha ido bien insertando")
 			return HttpResponse(json.dumps(response), content_type="application/json")
@@ -238,6 +264,7 @@ def detalle(request, titulo):
 			titulo=request.POST['titulo']
 			# Guardar actividad usuario
 			try:
+
 				unfollowAct=Usuario.objects.filter(User=usuario,title=titulo)
 				unfollowAct.delete()
 				response = {'message': True, 'siguiendo':False}

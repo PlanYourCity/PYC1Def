@@ -42,7 +42,7 @@
 			<form id="formDetalle">
 				<input type="hidden" name="categoria" value="{{categoria}}">
 				<input type="hidden" name="titulo" value="{{titulo}}">
-				<input type="hidden" name="usuario" value="{{request.user}}">
+				<input type="hidden" name="usuario" value="{{user}}">
 			</form>
 
 			<div class="float_items_detalle main_data">
@@ -138,14 +138,26 @@
 			<div class="white_box margin_top" id="description">
 				Descripción:&nbsp;{{descripcion}}
 			</div>
-			{% ifequal siguiendo "False" %}
+	
+			{% ifequal propietario user %}
 				<div id="follow_me_button_div">
-					<button type="button" class="white_box margin_top" id="follow_me">¡Sígueme!</button>
+					<div class="white_box precio_centrado margin_top">
+						Usuarios Siguiendo este evento: {{numUser}}
+					</div>
 				</div>
 			{% else %}
-				<div id="follow_me_button_div">
-					<button type="button" class="white_box margin_top" id="follow_me">Dejar de seguir</button>
-				</div>
+				{% ifequal siguiendo "False" %}
+					<div id="follow_me_button_div">
+						<button type="button" class="white_box margin_top" id="follow_me">¡Sígueme!</button>
+					</div>
+				{% else %}
+					<div id="follow_me_button_div">
+						<button type="button" class="white_box margin_top" id="follow_me">Dejar de seguir</button>
+					</div>
+				{% endifequal %}
 			{% endifequal %}
 		</div>
 	{% endblock %}
+
+	flimagar 
+	flimagar
