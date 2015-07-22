@@ -47,7 +47,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'core',
-    'fullcalendar',
+    #'fullcalendar',
     'social.apps.django_app.default',
 )
 
