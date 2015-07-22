@@ -41,9 +41,10 @@
       <div class="mdl-layout-spacer"></div>
       <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable
                   mdl-textfield--floating-label mdl-textfield--align-right">
+                  {{request.user}}
         <button id="demo-menu-lower-right"
 				class="mdl-button mdl-js-button">
-			<i class="material-icons icono_usuario">account_box</i>
+			<i class="material-icons icono_usuario">account_box</i> 
 		</button>
 		<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
 			for="demo-menu-lower-right">
@@ -58,22 +59,22 @@
     </div>
     </header>
     <div class="mdl-layout__drawer">
-      <span class="mdl-layout-title">Menú:</span>
+      <span class="mdl-layout-title"><i class="material-icons icono_menu">menu</i>Menú</span>
        <nav class="mdl-navigation">
        	  <div class="mdl-card__actions mdl-card--border">
 	      	<a class="mdl-navigation__link opcion_menu_lateral" href="http://localhost:8000/misactividades"><i class="material-icons icono_menu">event</i>Calendario</a>
 	      </div>
 	      <div class="mdl-card__actions mdl-card--border">
 	      	<div class="label_menu_lateral"><i class="material-icons icono_menu">search</i>Buscar</div>
-	      	<a class="mdl-navigation__link opcion_menu_lateral" href="http://localhost:8000/buscar/ocio/">Ocio</a>
-	      	<a class="mdl-navigation__link opcion_menu_lateral" href="http://localhost:8000/buscar/vivienda/">Vivienda</a>
-	      	<a class="mdl-navigation__link opcion_menu_lateral" href="http://localhost:8000/buscar/empleo/">Empleo</a>
+	      	<a class="mdl-navigation__link opcion_menu_lateral" href="http://localhost:8000/buscar/ocio/"><i class="material-icons icono_menu">directions_bike</i>Ocio</a>
+	      	<a class="mdl-navigation__link opcion_menu_lateral" href="http://localhost:8000/buscar/vivienda/"><i class="material-icons icono_menu">home</i>Vivienda</a>
+	      	<a class="mdl-navigation__link opcion_menu_lateral" href="http://localhost:8000/buscar/empleo/"><i class="material-icons icono_menu">work</i>Empleo</a>
 	      	</div>
 <div class="mdl-card__actions mdl-card--border">
 	      	<span class="label_menu_lateral"><i class="material-icons icono_menu">create</i>Ofertar</span>
-	      	<a class="mdl-navigation__link opcion_menu_lateral" href="http://localhost:8000/ofertar/ocio/">Ocio</a>
-	      	<a class="mdl-navigation__link opcion_menu_lateral" href="http://localhost:8000/ofertar/vivienda/">Vivienda</a>
-	      	<a class="mdl-navigation__link opcion_menu_lateral" href="http://localhost:8000/ofertar/empleo/">Empleo</a>
+	      	<a class="mdl-navigation__link opcion_menu_lateral" href="http://localhost:8000/ofertar/ocio/"><i class="material-icons icono_menu">directions_bike</i>Ocio</a>
+	      	<a class="mdl-navigation__link opcion_menu_lateral" href="http://localhost:8000/ofertar/vivienda/"><i class="material-icons icono_menu">home</i>Vivienda</a>
+	      	<a class="mdl-navigation__link opcion_menu_lateral" href="http://localhost:8000/ofertar/empleo/"><i class="material-icons icono_menu">work</i>Empleo</a>
 	      	</div>
 	      </nav>
     </div>

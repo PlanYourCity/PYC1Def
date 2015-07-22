@@ -1,6 +1,6 @@
 .label_menu_lateral {
 	padding-left: 1em;
-	font-size: 14px;
+	font-size: 24px;
 }
 
 .opcion_menu_lateral {
@@ -18,7 +18,13 @@
 }
 
 .icono_menu {
+	font-size: 24px;
 	text-align: left;
 	padding-right: 1em;
 	vertical-align: middle;
+}
+
+.page-content {
+	width: 90%;
+	margin: 0 auto;
 }
