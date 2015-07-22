@@ -1,5 +1,12 @@
-$(function() {
-    $( ".datepicker" ).datepicker();
+$('document').ready(function() {
+
+    /*DATEPICKER PARA LA FECHA*/
+    $( ".calendar" ).datepicker({
+        showOn: "button",
+        buttonImage: "/static/images/iconos/calendar.svg",
+        altField: "input[name='Fecha']"
+    });
+
     $.datepicker.regional['es'] = {
         closeText: 'Cerrar',
         prevText: '<Ant',
@@ -18,5 +25,6 @@ $(function() {
         yearSuffix: '',
         minDate: 0
     };
-    $.datepicker.setDefaults($.datepicker.regional['es']);
+    $.datepicker.setDefaults($.datepicker.regional['es']);    
+
 });

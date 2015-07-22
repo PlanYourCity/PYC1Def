@@ -71,3 +71,9 @@
    background-color: #2E6DA4;
    color: white;
 }
+
+.datepicker, .hour{
+	width: 15%;
+	text-align: center;
+}
+

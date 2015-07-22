@@ -181,12 +181,13 @@
 
 			<div class="float_items">
 				<label class="campo">Fecha:</label>
-				<input type="date" class="datepicker entrada campo_rellenar" name="Fecha"/>
+				<input type="date" class="datepicker entrada campo_rellenar" name="Fecha" readonly />
+				<input type="hidden" class="calendar"/>
 				<label class="msgError"></label>
 			</div>
 			<div class="float_items">
 				<label class="campo">Hora:</label>
-				<input class="entrada campo_rellenar" type="time" name="Hora" value=""/>	
+				<input class="entrada campo_rellenar hour" type="time" name="Hora" placeholder="HH:MM" value=""/>
 				<label class="msgError"></label>
 			</div>	
 
