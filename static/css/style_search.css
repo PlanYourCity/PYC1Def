@@ -19,6 +19,22 @@
 }
 
 .campo {
-	padding: 1em !important;
+	margin-right: 2em !important;
 	display: inline-block;
+}
+
+#lista_ciudades {
+	height: 300px !important;
+	/*width: 200px !important;*/
+	overflow-x:hidden;
+	overflow-y:scroll;
+}
+
+#provincia {
+	width: 20%;
+	display: inline-block;
+}
+
+#provinciaBD {
+	visibility: hidden;
 }

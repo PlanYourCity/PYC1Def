@@ -1,10 +1,10 @@
 $('document').ready(function(){
 
 	/*CAMPOS NUMÉRICOS*/
-	$('input[type="number"]').numeric();
+	/*$('input[type="number"]').numeric();*/
 	
 	/*VALIDACION CARACTERES ESPECIALES*/
-	function caracteresEspeciales(valInput, name){
+	/*function caracteresEspeciales(valInput, name){
  		var regex = /[\$\%\&\(\)\=\¿\?\*\^\{\}\_\-\"\'\<\>]/g;
 
  		if(regex.test(valInput)){
@@ -24,10 +24,10 @@ $('document').ready(function(){
 			);
  		}
 
-	}
+	}*/
 
 	/*EVENTO PARA COMPROBAR CAMPO*/
-	$('#formBuscar input').blur(function(){
+	/*$('#formBuscar input').blur(function(){
 		var valInput = $(this).val();
 		var name = $(this).attr("name");
 
@@ -45,5 +45,17 @@ $('document').ready(function(){
 		}else{
 			return false;
 		}
-	});
+	});*/
+
+
+    $('#lista_ciudades').perfectScrollbar();
+
+    // with vanilla JS!
+    Ps.initialize(document.getElementById('lista_ciudades'));
+	
+
 });
+function rellenarCiudad(element) {
+	$('#provincia').val($(element).text());
+	$('#provinciaBD').attr("value",$(element).attr("value"));
+	}
