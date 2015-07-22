@@ -1,7 +1,12 @@
+{% load fullcalendar_tags %}
 <!DOCTYPE html>
 <html>
 	<title>Plan Your City</title>	
-<head>			
+<head>	
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">		
 	<link rel="stylesheet" type="text/css" href="/static/css/style.css">
 	<link rel="stylesheet" type="text/css" href="/static/css/style_listing.css">
 	<link rel="stylesheet" type="text/css" href="/static/css/stylesheet_detalle.css">
@@ -17,6 +22,14 @@
 
 	<script src="http://maps.googleapis.com/maps/api/js"></script>
 
+	{% fullcalendar_css %}        
+	{% fullcalendar_print_css %}        
+	{% fullcalendar_jquery %}
+	{% fullcalendar_jquery_ui %}
+	{% fullcalendar_javascript %}
+
+	{% calendar_init calendar_config_options %}
+
 	<meta charset="utf-8">
 </head>
 <body>
@@ -24,7 +37,7 @@
 
 		<div class="row calendario">
 			<div class=".col-lg-12 boton btn btn-primary btn-lg">
-				<li><a href="http://localhost:8000/misactividades">Calendario</a></li>
+				<li><a href="http://localhost:8000/calendario">Calendario</a></li>
 			</div>
 		</div>
 
@@ -86,8 +99,8 @@
 	</div>
 
 	<!--Llamadas a scripts-->
-	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>   	  	
-	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+	<!--script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>   	  	
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script-->
 	<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="/static/js/plugin/alertify.min.js"></script>
 	<script type="text/javascript" src="/static/js/plugin/jquery.numeric.js"></script>

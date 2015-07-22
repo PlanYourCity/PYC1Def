@@ -140,7 +140,6 @@ def detalle(request, titulo):
 	Act_ocio=ActOcio.objects.all()
 	Act_viv=ActVivienda.objects.all()
 	Act_Emp=ActEmpleo.objects.all() 
-
 	record = Usuario.objects.filter(User=request.user, title= titulo)
 	if record:
 		siguiendo = "True"
@@ -192,20 +191,43 @@ def detalle(request, titulo):
 		template = get_template("detalle_ocio.html")	
 		return HttpResponse(template.render(Context(diccionario)))				
 	elif request.method=="POST":
-
+		Fech=""
 		if request.POST['action'] == "follow":
 			print("backend seguir")
 			respuesta = {}
 			categoria=request.POST['categoria']
 			usuario=request.POST['usuario']
 			titulo=request.POST['titulo']
-				# Guardar actividad usuario
+				# Guardar actividad usuarios
+			if categoria=="ocio":
+				Activ_ocio=ActOcio.objects.get(Titulo=titulo)
+				Fech=Activ_ocio.Fecha
+				hora=Activ_ocio.Hora
+			elif categoria=="vivienda":
+				Activ_viv=ActVivienda.objects.get(Titulo=titulo)
+				Fech=Activ_viv.Fecha
+				hora=Activ_viv.Hora
+			elif categoria=="empleo":
+				Activ_emp=ActEmpleo.objects.get(Titulo=titulo)
+				Fech=Activ_emp.Fecha
+				hora=Activ_emp.Hora
+
 			try:
 				record=Usuario.objects.get(title=titulo)
 				response = {'message': False}
 			except:
-				Nueva_Actividad_user=Usuario(User=usuario,title=titulo,Categoria=categoria)
+				print("estoy aqui")
+				#fech="24/07/2015"
+				#hora=" 15:30"
+				dia=Fech.split("/")[0]
+				mes=Fech.split("/")[1]
+				ano=Fech.split("/")[2]
+				fecha=ano+"-"+mes+"-"+dia
+				fecha_comp=fecha+" "+hora
+				Nueva_Actividad_user=Usuario(title=titulo,start=fecha_comp,end=fecha_comp,User=usuario,Categoria=categoria)
 				Nueva_Actividad_user.save()
+				#Nueva_Actividad_user=Usuario(User=usuario,title=titulo,Categoria=categoria)
+				#Nueva_Actividad_user.save()
 				response = {'message': True, 'siguiendo':True}
 				print("todo ha ido bien insertando")
 			return HttpResponse(json.dumps(response), content_type="application/json")
@@ -242,15 +264,15 @@ def ofertar(request,categoria):
 		direccio=request.POST['Direccion']
 		titul=request.POST['Titulo']
 		descripcio=request.POST['Descripcion']	
-		
+		fech=request.POST['Fecha']	
+		hor=request.POST['Hora']
+
 		if categoria=="ocio":
 				
 			image=request.POST['Imagen']
 			#ruta_imga="../../static/images/"
 
-			preci=request.POST['Precio']
-			fech=request.POST['Fecha']	
-			hor=request.POST['Hora']	
+			preci=request.POST['Precio']	
 			aforo_ma=request.POST['Aforo_Max']	
 			propietari=request.user
 
@@ -273,7 +295,7 @@ def ofertar(request,categoria):
 				record=ActVivienda.objects.get(Titulo=titul)
 				response = {'message': False}
 			except:
-				Nueva_vivienda=ActVivienda(Ciudad=ciuda,Direccion=direccio,Titulo=titul,Descripcion=descripcio,Imagen=imagen,Precio=precio,NumHab=nhabit,TipoOferta=toferta,Usuario_owner=propietario)
+				Nueva_vivienda=ActVivienda(Ciudad=ciuda,Direccion=direccio,Titulo=titul,Descripcion=descripcio,Imagen=imagen,Precio=precio,Fecha=fech,Hora=hor,NumHab=nhabit,TipoOferta=toferta,Usuario_owner=propietario)
 				Nueva_vivienda.save()
 				response = {'message': True}
 			#return HttpResponseRedirect("/ofertar/vivienda")
@@ -290,7 +312,7 @@ def ofertar(request,categoria):
 				response = {'message': False}
 			except:
 
-				Nueva_Empleo=ActEmpleo(Ciudad=ciuda,Direccion=direccio,Titulo=titul,Descripcion=descripcio,Sueldo=sueldo,Periodo=periodo,Plazas=plazas,Usuario_owner=propietario)
+				Nueva_Empleo=ActEmpleo(Ciudad=ciuda,Direccion=direccio,Titulo=titul,Descripcion=descripcio,Sueldo=sueldo,Periodo=periodo,Fecha=fech,Hora=hor,Plazas=plazas,Usuario_owner=propietario)
 				Nueva_Empleo.save()
 				response = {'message': True}			
 			#return HttpResponseRedirect("/ofertar/empleo")
@@ -309,8 +331,8 @@ def menu_buscar(request,categoria):
 
 @login_required
 def buscar(request,categoria,page):
-	global record
-
+	#global record
+	record=""
 	if request.method == "POST":			
 					
 		ciudad=str(request.POST['provincia'])
