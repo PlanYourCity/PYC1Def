@@ -118,9 +118,10 @@ def detalle(request, titulo):
 	else:
 		siguiendo = "False"
 
+	
+
 	if request.method=="GET":	
 		for i in Act_ocio:
-
 			if titulo==i.Titulo:
 
 				categoria="ocio"
@@ -132,9 +133,16 @@ def detalle(request, titulo):
 				Descri=i.Descripcion
 				Afor= i.Aforo_Max
 				fecha=i.Fecha
-				diccionario = {'categoria':categoria,'titulo':Tit,'imagen':Imag,'precio':Prec,'direccion':Dirr,'hora':Hour,'descripcion':Descri,'aforo':Afor,'fecha':fecha, 'request':request, 'siguiendo': siguiendo}
-		for i in Act_viv:
+				propietario=str(i.Usuario_owner)
+				user=str(request.user)
 
+				numUser = Usuario.objects.filter(Title=Tit).count()
+				if not numUser:
+					numUser = "0"
+
+				diccionario = {'categoria':categoria,'titulo':Tit,'imagen':Imag,'precio':Prec,'direccion':Dirr,'hora':Hour,'descripcion':Descri,'aforo':Afor,'fecha':fecha,'propietario':propietario, 'user':user, 'siguiendo': siguiendo, 'numUser':numUser}
+
+		for i in Act_viv:
 			if titulo==i.Titulo:
 
 				categoria="vivienda"
@@ -145,7 +153,14 @@ def detalle(request, titulo):
 				num_habt=i.NumHab
 				Descri=i.Descripcion
 				Toferta= i.TipoOferta
-				diccionario = {'categoria':categoria,'titulo':Tit,'imagen':Imag,'precio':prec,'direccion':Dirr,'num_habt':num_habt,'descripcion':Descri,'Toferta':Toferta, 'request':request, 'siguiendo': siguiendo}		
+				propietario=str(i.Usuario_owner)
+				user=str(request.user)
+
+				numUser = Usuario.objects.filter(Title=Tit).count()
+				if not numUser:
+					numUser = "0"
+
+				diccionario = {'categoria':categoria,'titulo':Tit,'imagen':Imag,'precio':prec,'direccion':Dirr,'num_habt':num_habt,'descripcion':Descri,'Toferta':Toferta,'propietario':propietario, 'user':user, 'siguiendo': siguiendo, 'numUser':numUser}		
 
 		for i in Act_Emp:
 			if titulo==i.Titulo:
@@ -157,10 +172,18 @@ def detalle(request, titulo):
 				Periodo=i.Periodo
 				Descri=i.Descripcion
 				Plazas= i.Plazas
-				diccionario = {'categoria':categoria,'titulo':Tit,'imagen':Imag,'Sueldo':Sueldo,'direccion':Dirr,'Periodo':Periodo,'descripcion':Descri,'Plazas':Plazas, 'request':request, 'siguiendo': siguiendo}		
+				propietario=str(i.Usuario_owner)
+				user=str(request.user)
+
+				numUser = Usuario.objects.filter(Title=Tit).count()
+				if not numUser:
+					numUser = "0"
+
+				diccionario = {'categoria':categoria,'titulo':Tit,'imagen':Imag,'Sueldo':Sueldo,'direccion':Dirr,'Periodo':Periodo,'descripcion':Descri,'Plazas':Plazas,'propietario':propietario, 'user':user, 'siguiendo': siguiendo, 'numUser':numUser}		
 
 		template = get_template("detalle_ocio.html")	
-		return HttpResponse(template.render(Context(diccionario)))				
+		return HttpResponse(template.render(Context(diccionario)))	
+
 	elif request.method=="POST":
 
 		if request.POST['action'] == "follow":
