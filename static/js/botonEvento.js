@@ -5,11 +5,11 @@ $('document').ready(function(){
 	});
 
 	$('.eliminar_div').mouseenter(function(){
-		$('.evento').removeClass('hoverEvento');
+		$(this).parent().removeClass('hoverEvento');
 	});
 
 	$('.eliminar_div').mouseleave(function(){
-		$('.evento').addClass('hoverEvento');
+		$(this).parent().addClass('hoverEvento');
 	});
 
 	$('.evento').mouseleave(function(){
@@ -29,7 +29,6 @@ $('document').ready(function(){
 		$('.evento').removeClass('hoverEvento');
 		if(confirm("¿Eliminar actividad?")) {
 			var eventoEliminar = $(this).parent().parent();
-			$(eventoEliminar).hide("drop", { direction: "down" }, "slow");
 			var url = "/listado/";
 			var datos = "titulo=" + $(this).parent().parent().find("h3").text();
 			$.ajax({
@@ -37,9 +36,7 @@ $('document').ready(function(){
 				url: url,
 				data: datos,
 				success: function(data){
-					if(data.message==true){
-
-					}
+					$(eventoEliminar).hide("drop", { direction: "down" }, "slow");
 				}
 			});
 			return false;
