@@ -129,12 +129,12 @@
 			{% ifequal categoria "vivienda" %}
 				<div class="float_items">
 					<label class="campo">Precio (€):</label>
-					<input class="entrada campo_rellenar" type="number" name="Precio" value=""/>
+					<input class="entrada campo_rellenar" type="number" name="Precio" min="0" value="0"/>
 					<label class="msgError"></label>
 				</div>
 				<div class="float_items">
 					<label class="campo">Número de habitaciones:</label>
-					<input class="entrada campo_rellenar" type="text" name="NumHab" value=""/>
+					<input class="entrada campo_rellenar" type="number" name="NumHab" min="0" value="0"/>
 					<label class="msgError"></label>
 				</div>
 				<div class="float_items">
@@ -156,12 +156,12 @@
 			{% ifequal categoria "empleo" %}
 				<div class="float_items">
 					<label class="campo">Sueldo (€):</label>
-					<input class="entrada campo_rellenar" type="number" name="Sueldo" value=""/>
+					<input class="entrada campo_rellenar" type="number" name="Sueldo" min="0" value="0"/>
 					<label class="msgError"></label>
 				</div>
 				<div class="float_items">
 					<label class="campo">Plazas:</label>
-					<input class="entrada campo_rellenar" type="number" name="Plazas" value=""/>
+					<input class="entrada campo_rellenar" type="number" name="Plazas" min="0" value="0"/>
 					<label class="msgError"></label>
 				</div>
 				<div class="float_items">
