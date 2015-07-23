@@ -4,12 +4,12 @@ $('document').ready(function(){
 		$(this).addClass('hoverEvento');
 	});
 
-	$('.eliminar_div').mouseenter(function(){
-		$(this).parent().removeClass('hoverEvento');
+	$('.eliminar_boton').mouseenter(function(){
+		$(this).parent().parent().removeClass('hoverEvento');
 	});
 
-	$('.eliminar_div').mouseleave(function(){
-		$(this).parent().addClass('hoverEvento');
+	$('.eliminar_boton').mouseleave(function(){
+		$(this).parent().parent().addClass('hoverEvento');
 	});
 
 	$('.cardEvent').mouseleave(function(){
@@ -30,7 +30,7 @@ $('document').ready(function(){
 		if(confirm("¿Eliminar actividad?")) {
 			var eventoEliminar = $(this).parent().parent();
 			var url = "/listado/";
-			var datos = "titulo=" + $(this).parent().parent().find("h3").text();
+			var datos = "titulo=" + $(this).parent().parent().find("h2").text();
 			$.ajax({
 				method: "POST",
 				url: url,

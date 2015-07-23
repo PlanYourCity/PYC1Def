@@ -343,7 +343,7 @@ def ofertar(request,categoria):
 			except:
 
 
-				Nueva_Empleo=ActEmpleo(Ciudad=ciuda,Direccion=direccio,Titulo=titul,Descripcion=descripcio,Imagen=imagen,Sueldo=sueldo,Periodo=periodo,Plazas=plazas,Usuario_owner=propietario)
+				Nueva_Empleo=ActEmpleo(Ciudad=ciuda,Direccion=direccio,Titulo=titul,Descripcion=descripcio,Imagen=imagen,Sueldo=sueldo,Periodo=periodo,Fecha=fech,Hora=hor,Plazas=plazas,Usuario_owner=propietario)
 
 				Nueva_Empleo.save()
 				response = {'message': True}			

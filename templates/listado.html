@@ -21,9 +21,9 @@
 
 						<div class="precio">
 							{% ifequal i.Precio "0" %}
-							<span class="precio">Gratis</span>
+							<span>Gratis</span>
 							{% else %}
-							<span class="precio">{{i.Precio}} €</span>
+							<span>{{i.Precio}} €</span>
 							{% endifequal %}
 						</div>
 						
@@ -56,9 +56,9 @@
 
 						<div class="precio">
 							{% ifequal i.Precio "0" %}
-							<span class="precio">Gratis</span>
+							<span>Gratis</span>
 							{% else %}
-							<span class="precio">{{i.Precio}} €</span>
+							<span>{{i.Precio}} €</span>
 							{% endifequal %}
 						</div>
 						
@@ -91,10 +91,10 @@
 					</div>
 
 					<div class="precio">
-						{% ifequal i.Precio "0" %}
-						<span class="precio">Gratis</span>
+						{% ifequal i.Sueldo "0" %}
+						<span>Gratis</span>
 						{% else %}
-						<span class="precio">{{i.Precio}} €</span>
+						<span>{{i.Sueldo}} €</span>
 						{% endifequal %}
 					</div>
 				</div>
