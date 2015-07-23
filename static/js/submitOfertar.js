@@ -90,6 +90,7 @@ $('document').ready(function(){
 			  	if(data.message == true){
 			  		alertify.set('notifier','position','top-right');
 					alertify.success('¡¡Evento registrado!!');
+					$('#formOfertar')[0].reset();
 			  	}
 			  	else{
 			  		alertify.set('notifier','position','top-right');

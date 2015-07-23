@@ -250,7 +250,8 @@ def ofertar(request,categoria):
 		elif categoria=="empleo":
 			sueldo=request.POST["Sueldo"]
 			periodo=request.POST["Periodo"]	
-			plazas=request.POST["Plazas"]	
+			plazas=request.POST["Plazas"]
+			imagen=request.POST['Imagen']	
 			propietario=request.user
 
 			try:
@@ -258,7 +259,7 @@ def ofertar(request,categoria):
 				response = {'message': False}
 			except:
 
-				Nueva_Empleo=ActEmpleo(Ciudad=ciuda,Direccion=direccio,Titulo=titul,Descripcion=descripcio,Sueldo=sueldo,Periodo=periodo,Plazas=plazas,Usuario_owner=propietario)
+				Nueva_Empleo=ActEmpleo(Ciudad=ciuda,Direccion=direccio,Titulo=titul,Descripcion=descripcio,Imagen=imagen,Sueldo=sueldo,Periodo=periodo,Plazas=plazas,Usuario_owner=propietario)
 				Nueva_Empleo.save()
 				response = {'message': True}			
 			#return HttpResponseRedirect("/ofertar/empleo")
@@ -291,7 +292,7 @@ def buscar(request,categoria,page):
 			aforo=str(request.POST['aMax'])
 			direc= str(request.POST['direccion'])
 			record=ActOcio.objects.all()
-			
+
 			if titulo!="":
 				record=record.filter(Titulo__contains = titulo)
 			if ciudad != "":

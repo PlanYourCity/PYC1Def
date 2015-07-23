@@ -2,77 +2,106 @@
 	{% block content %}
 		<h3>Resultados de la busqueda</h3>
 		{% ifequal categoria "ocio" %}
-			{% for i in record %}	
-				<div class="evento">
-					<div class="imagenEvento">
-						<img src="/static/images/{{i.Imagen}}">
+			{% for i in record %}
+						
+				<div class="mdl-card mdl-shadow--2dp demo-card-wide">
+					<div class="mdl-card__title" style="background:url('/static/images/{{i.Imagen}}') center / cover">
+						<h2 class="mdl-card__title-text">{{i.Titulo}}</h2>
 					</div>
-					<div class="detallesEvento">
-						<h3>{{i.Titulo}}</h3>
+					<div class="mdl-card__supporting-text dataEvent">
 						<div class="datosEvento">
-							<p>Ciudad: {{i.Ciudad}}</p>
-							<p>Dirección: {{i.Direccion}}</p>
-							<div class="datos">
-								Hora: {{i.Hora}}
-							</div>
+							<span>{{i.Ciudad}}</span>
+							<br>
+							<span>{{i.Direccion}}</span>
+							<br>
+							<span>{{i.Fecha}}</span>
+							<br>
+							<span>{{i.Hora}}</span>
 						</div>
 
 						<div class="precio">
-							{{i.Precio}}
+							{% ifequal i.Precio "0" %}
+							<span class="precio">Gratis</span>
+							{% else %}
+							<span class="precio">{{i.Precio}} €</span>
+							{% endifequal %}
 						</div>
+						
 					</div>
+					
+					
 				</div>
+				
+				<br>
+
 			{% endfor %}
 		{% endifequal %}
 
 		{% ifequal categoria "vivienda" %}
 			{% for i in record %}
-				<div class="evento">
-					<div class="imagenEvento">
-						<img src="/static/images/{{i.Imagen}}">
+			<div class="mdl-card mdl-shadow--2dp demo-card-wide">
+					<div class="mdl-card__title" style="background:url('/static/images/{{i.Imagen}}') center / cover">
+						<h2 class="mdl-card__title-text">{{i.Titulo}}</h2>
 					</div>
-
-					<div class="detallesEvento">
-						<h3>{{i.Titulo}}</h3>
+					<div class="mdl-card__supporting-text dataEvent">
 						<div class="datosEvento">
-							<p>Ciudad: {{i.Ciudad}}</p>
-							<p>Dirección: {{i.Direccion}}</p>
-							<div class="datos">
-								<div>Num. Habitaciones: {{i.NumHab}}</div>
-							</div>
+							<span>{{i.Ciudad}}</span>
+							<br>
+							<span>{{i.Direccion}}</span>
+							<br>
+							<span>{{i.Fecha}}</span>
+							<br>
+							<span>{{i.Hora}}</span>
 						</div>
 
 						<div class="precio">
-							{{i.Precio}}
+							{% ifequal i.Precio "0" %}
+							<span class="precio">Gratis</span>
+							{% else %}
+							<span class="precio">{{i.Precio}} €</span>
+							{% endifequal %}
 						</div>
+						
 					</div>
+					
+					
 				</div>
+				
+				<br>
+
 			{% endfor %}
 		{% endifequal %}
 
-				{% ifequal categoria "empleo" %}
+		{% ifequal categoria "empleo" %}
 			{% for i in record %}
-				<div class="evento">
-					<div class="imagenEvento">
 
-						<img src="/static/images/{{i.Imagen}}">
-
+			<div class="mdl-card mdl-shadow--2dp demo-card-wide">
+				<div class="mdl-card__title" style="background:url('/static/images/{{i.Imagen}}') center / cover">
+					<h2 class="mdl-card__title-text">{{i.Titulo}}</h2>
+				</div>
+				<div class="mdl-card__supporting-text dataEvent">
+					<div class="datosEvento">
+						<span>{{i.Ciudad}}</span>
+						<br>
+						<span>{{i.Direccion}}</span>
+						<br>
+						<span>{{i.Fecha}}</span>
+						<br>
+						<span>{{i.Hora}}</span>
 					</div>
 
-					<div class="detallesEvento">
-						<h3>{{i.Titulo}}</h3>
-						<div class="datosEvento">
-							<p>Ciudad: {{i.Ciudad}}</p>
-							<div class="datos">
-								<div>Periodo: {{i.Periodo}}</div>
-							</div>
-						</div>
-
-						<div class="precio">
-							{{i.Sueldo}}
-						</div>
+					<div class="precio">
+						{% ifequal i.Precio "0" %}
+						<span class="precio">Gratis</span>
+						{% else %}
+						<span class="precio">{{i.Precio}} €</span>
+						{% endifequal %}
 					</div>
 				</div>
+			</div>
+			
+			<br>
+
 			{% endfor %}
 		{% endifequal %}
 

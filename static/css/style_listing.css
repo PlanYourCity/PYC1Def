@@ -61,12 +61,12 @@
 	display: inline-block;
 }
 
-.datosEvento {
+/*.datosEvento {
 	display: inline-block;
 	margin: 0 auto;
     width: 80%;
     font-size: 20px;
-}
+}*/
 
 #detalles {
     margin-top: 50px;
@@ -80,14 +80,52 @@
     /*width: 29%;*/
 }
 
-.precio{
+/*.precio{
 	font-size: 300%;
 	text-align: right;
 	float: right;
 	display: inline-block;
 	width: 20%;
 	height: 100%;
+}*/
+
+/*ESTILO TARJETAS*/
+.demo-card-wide{
+    margin: 0 auto;
 }
+
+.demo-card-wide.mdl-card {
+    width: 60%;
+}
+.demo-card-wide > .mdl-card__title {
+    color: #fff;
+    height: 176px;
+}
+.demo-card-wide > .mdl-card__menu {
+    color: #fff;
+}
+
+.dataEvent {
+    float: left !important;
+    font-size: 1.2em !important;
+    width: 100% !important;
+}
+
+.datosEvento{
+    float: left;
+    width: 50%;
+}
+
+.precio{
+    float: right;
+    font-size: 1.5em;
+    height: 100%;
+    margin-top: 3%;
+    padding-right: 0;
+    width: 50%;
+}
+/*HASTA AQUI*/
+
 
 .pagination {
 	width: 100%;
