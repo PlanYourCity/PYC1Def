@@ -1,5 +1,12 @@
-$(function() {
-    $( ".datepicker" ).datepicker();
+$('document').ready(function() {
+
+    /*DATEPICKER PARA LA FECHA*/
+    $( ".calendar" ).datepicker({
+        showOn: "button",
+        buttonImage: "/static/images/iconos/calendar.svg",
+        altField: "input[name='Fecha']"
+    });
+
     $.datepicker.regional['es'] = {
         closeText: 'Cerrar',
         prevText: '<Ant',
@@ -25,3 +32,4 @@ function rellenarCiudad(element) {
     $('#provincia').val($(element).text());
     $('#provinciaBD').attr("value",$(element).attr("value"));
     }
+
