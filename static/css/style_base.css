@@ -28,3 +28,7 @@
 	width: 90%;
 	margin: 0 auto;
 }
+
+#icono_transparente {
+	color: transparent;
+}

@@ -75,7 +75,22 @@
 .datepicker, .hour{
 	width: 15%;
 	text-align: center;
-}+/
+}*/
+
+.demo-card-wide {
+	margin: auto;
+	margin-top: 5%;
+	margin-bottom: 5%;
+	width: 80%;
+}
+
+.mdl-card__title {
+	background-color: rgb(83,109,254);
+}
+
+.titulo_ofertar {
+	color: white;
+}
 
 .ciudades {
 	width: 250px !important;
@@ -102,4 +117,9 @@
 
 #provinciaBD {
 	visibility: hidden;
+}
+
+.boton_formulario {
+	margin-top: 20px;
+	margin-right: 20px;
 }

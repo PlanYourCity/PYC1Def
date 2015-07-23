@@ -3,7 +3,6 @@
 <title>Plan Your City</title>	
 <head>
 	<link rel="stylesheet" href="/static/css/plugin/material.min.css">
-	<script src="/static/js/plugin/material.min.js"></script>
 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 	<link rel="stylesheet" type="text/css" href="/static/css/style_base.css">
 
@@ -23,7 +22,7 @@
     <!--CSS PARA CONSTRUCCION-->
     <!--<link rel="stylesheet" type="text/css" href="/static/css/style_building.css">-->
 
-    <script src="http://maps.googleapis.com/maps/api/js"></script>
+    
 
     <meta charset="utf-8">
 </head>
@@ -59,11 +58,13 @@
     </div>
     </header>
     <div class="mdl-layout__drawer">
-      <span class="mdl-layout-title"><i class="material-icons icono_menu">menu</i>Menú</span>
        <nav class="mdl-navigation">
        	  <div class="mdl-card__actions mdl-card--border">
-	      	<a class="mdl-navigation__link opcion_menu_lateral" href="http://localhost:8000/misactividades"><i class="material-icons icono_menu">event</i>Calendario</a>
+       	  	<div class="label_menu_lateral"><i class="material-icons icono_menu">check_circle</i>Actividades <i id="icono_transparente" class="material-icons icono_menu">search</i>suscritas</div>
+	      	<a class="mdl-navigation__link opcion_menu_lateral" href="http://localhost:8000/calendario"><i class="material-icons icono_menu">event</i>Calendario</a>
+	      	<a class="mdl-navigation__link opcion_menu_lateral" href="http://localhost:8000/misactividades"><i class="material-icons icono_menu">assignment</i>Listado</a>
 	      </div>
+
 	      <div class="mdl-card__actions mdl-card--border">
 	      	<div class="label_menu_lateral"><i class="material-icons icono_menu">search</i>Buscar</div>
 	      	<a class="mdl-navigation__link opcion_menu_lateral" href="http://localhost:8000/buscar/ocio/"><i class="material-icons icono_menu">directions_bike</i>Ocio</a>
@@ -213,9 +214,11 @@
 
 </body>
 
+<script src="/static/js/plugin/material.min.js"></script>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>   	  	
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 <script type="text/javascript" src="/static/js/ofertar.js"></script>
+<script src="http://maps.googleapis.com/maps/api/js"></script>
 <!--Llamadas a scripts-->
 <!--
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>   	  	

@@ -1,18 +1,13 @@
 {% extends 'base.html' %}
 	{% block content %}
 
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>   	  	
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
 
 	<link rel="stylesheet" type="text/css" href="/static/css/style_search.css">
-	<script type="text/javascript" src="/static/js/formBusqueda.js"></script>
 	<!-- Perfect scrollbar-->
 	<link rel="stylesheet" type="text/css" href="/static/css/plugin/perfect-scrollbar.css">
 	<link rel="stylesheet" type="text/css" href="/static/css/plugin/perfect-scrollbar.min.css">
-	<script type="text/javascript" src="/static/js/plugin/perfect-scrollbar.jquery.min.js"></script>
-	<script type="text/javascript" src="/static/js/plugin/perfect-scrollbar.jquery.js"></script>
-	<script type="text/javascript" src="/static/js/plugin/perfect-scrollbar.js"></script>
-	<script type="text/javascript" src="/static/js/plugin/perfect-scrollbar.min.js"></script>
+	
 
 	<div class="mdl-card mdl-shadow--2dp demo-card-wide">
 	  <div class="mdl-card__title">
@@ -203,9 +198,12 @@
 			  	</div>
 			  	</div>
 			<div class="campo">
-				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
-				    <input class="mdl-textfield__input datepicker" type="text" pattern="[0-3][0-9]/[0-1][0-9]/[0-9]{4}" id="fHasta" name="fHasta" />
-				    <label class="mdl-textfield__label" for="fHasta">Hasta</label>
+				<div class="mdl-textfield mdl-js-textfield textfield-demo">
+					<input class="mdl-textfield__input datepicker" type="text" pattern="[0-3][0-9]/[0-1][0-9]/[0-9]{4}" id="fHasta" name="fHasta" readonly/>
+				    <label class="mdl-textfield__label" for="fHasta"></label>
+				    <div class="mdl-tooltip mdl-tooltip--large" for="fHasta">
+						Hasta
+					</div>
 				    <span class="mdl-textfield__error">No es una fecha válida</span>
 			  	</div>
 			  	</div>
@@ -277,4 +275,9 @@
 
 	</div>
 
+<script type="text/javascript" src="/static/js/formBusqueda.js"></script>
+<script type="text/javascript" src="/static/js/plugin/perfect-scrollbar.jquery.min.js"></script>
+	<script type="text/javascript" src="/static/js/plugin/perfect-scrollbar.jquery.js"></script>
+	<script type="text/javascript" src="/static/js/plugin/perfect-scrollbar.js"></script>
+	<script type="text/javascript" src="/static/js/plugin/perfect-scrollbar.min.js"></script>
 	{% endblock %}
