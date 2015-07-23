@@ -53,6 +53,7 @@ class Usuario(models.Model):
 	start=models.DateTimeField(_('Start'),null=True)
 	end=models.DateTimeField(_('End'),null=True)
 	all_day=models.BooleanField(_('All day'), default=False)
+	url=models.CharField(max_length=100)
 	User=models.CharField(max_length=100)	
 	Categoria=models.CharField(max_length=15)
 	

@@ -169,7 +169,7 @@ def detalle(request, titulo):
 				propietario=str(i.Usuario_owner)
 				user=str(request.user)
 
-				numUser = Usuario.objects.filter(Title=Tit).count()
+				numUser = Usuario.objects.filter(title=Tit).count()
 				if not numUser:
 					numUser = "0"
 
@@ -189,7 +189,7 @@ def detalle(request, titulo):
 				propietario=str(i.Usuario_owner)
 				user=str(request.user)
 
-				numUser = Usuario.objects.filter(Title=Tit).count()
+				numUser = Usuario.objects.filter(title=Tit).count()
 				if not numUser:
 					numUser = "0"
 
@@ -208,7 +208,7 @@ def detalle(request, titulo):
 				propietario=str(i.Usuario_owner)
 				user=str(request.user)
 
-				numUser = Usuario.objects.filter(Title=Tit).count()
+				numUser = Usuario.objects.filter(title=Tit).count()
 				if not numUser:
 					numUser = "0"
 
@@ -247,12 +247,13 @@ def detalle(request, titulo):
 				print("estoy aqui")
 				#fech="24/07/2015"
 				#hora=" 15:30"
+				url="localhost:8000/detalle/"+str(titulo)+"/"
 				dia=Fech.split("/")[0]
 				mes=Fech.split("/")[1]
 				ano=Fech.split("/")[2]
 				fecha=ano+"-"+mes+"-"+dia
 				fecha_comp=fecha+" "+hora
-				Nueva_Actividad_user=Usuario(title=titulo,start=fecha_comp,end=fecha_comp,User=usuario,Categoria=categoria)
+				Nueva_Actividad_user=Usuario(title=titulo,start=fecha_comp,end=fecha_comp,url=url,User=usuario,Categoria=categoria)
 				Nueva_Actividad_user.save()
 				response = {'message': True, 'siguiendo':True}
 				print("todo ha ido bien insertando")
