@@ -1,7 +1,20 @@
+{% load fullcalendar_tags %}
 <!DOCTYPE html>
 <html>
+
 	<title>Plan Your City</title>	
-<head>			
+<head>	
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">		
+	<link rel="stylesheet" href="/static/css/plugin/material.min.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<link rel="stylesheet" type="text/css" href="/static/css/style_base.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/stylesheet_detalle.css">
+	<script src="http://maps.googleapis.com/maps/api/js"></script>
+
+	<!--
 	<link rel="stylesheet" type="text/css" href="/static/css/style.css">
 	<link rel="stylesheet" type="text/css" href="/static/css/style_listing.css">
 	<link rel="stylesheet" type="text/css" href="/static/css/stylesheet_detalle.css">
@@ -10,87 +23,100 @@
 	<link rel="stylesheet" type="text/css" href="/static/css/plugin/alertify/alertify.min.css">
 	<link rel="stylesheet" type="text/css" href="/static/css/plugin/alertify/default.min.css">
 	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="/static/css/plugin/material.min.css">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">-->
 
-	<!--CSS PARA CONSTRUCCION-->
-	<link rel="stylesheet" type="text/css" href="/static/css/style_building.css">
+    <!--<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">-->
 
-	<script src="http://maps.googleapis.com/maps/api/js"></script>
+    <!--CSS PARA CONSTRUCCION-->
+    <!--<link rel="stylesheet" type="text/css" href="/static/css/style_building.css">-->
+
+
+    
+
+	{% fullcalendar_css %}        
+	{% fullcalendar_print_css %}        
+	{% fullcalendar_jquery %}
+	{% fullcalendar_jquery_ui %}
+	{% fullcalendar_javascript %}
+
+	{% calendar_init calendar_config_options %}
 
 	<meta charset="utf-8">
+
 </head>
 <body>
-	<div id="menuLateral" class="btn-group-vertical navbar-default" role="group">
 
-		<div class="row calendario">
-			<div class=".col-lg-12 boton btn btn-primary btn-lg">
-				<li><a href="http://localhost:8000/misactividades">Calendario</a></li>
-			</div>
-		</div>
+<!-- The drawer is always open in large screens. The header is always shown,
+  even in small screens. -->
+<div class="demo-layout">
+  <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer
+              mdl-layout--fixed-header">
 
-		<div class="row buscar">
-			<div class=".col-lg-12 boton btn btn-primary btn-lg ">
-				<li><a href="#">Buscar</a></li>
-			</div>
-			<div class="submenuBuscar btn-primary">
-				<ul>
-					<li><a href="#">Ocio</a></li>
-					<li><a href="#">Vivienda</a></li>
-					<li><a href="#">Empleo</a></li>
-				</ul>
-			</div>
-		</div>
+    <header class="mdl-layout__header">
+      <div class="mdl-layout__header-row">
+      	<h1>Plan Your City</h1>
+      <div class="mdl-layout-spacer"></div>
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable
+                  mdl-textfield--floating-label mdl-textfield--align-right">
+                  {{request.user}}
+        <button id="demo-menu-lower-right"
+				class="mdl-button mdl-js-button">
+			<i class="material-icons icono_usuario">account_box</i> 
+		</button>
+		<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
+			for="demo-menu-lower-right">
+			<a class="opcion_boton_usuario" href="http://localhost:8000/listado/"><li class="mdl-menu__item">Eventos creados</li></a>
+			<a class="opcion_boton_usuario" href="{% url 'auth:logout' %}?next={{ request.path }}"><li class="mdl-menu__item">Logout</li></a>
+		</ul>
+        <div class="mdl-textfield__expandable-holder">
+          <input class="mdl-textfield__input" type="text" name="sample"
+                 id="fixed-header-drawer-exp" />
+        </div>
+      </div>
+    </div>
+    </header>
+    <div class="mdl-layout__drawer">
+       <nav class="mdl-navigation">
+       	  <div class="mdl-card__actions mdl-card--border">
+       	  	<div class="label_menu_lateral"><i class="material-icons icono_menu">check_circle</i>Actividades <i id="icono_transparente" class="material-icons icono_menu">search</i>suscritas</div>
+	      	<a class="mdl-navigation__link opcion_menu_lateral" href="http://localhost:8000/calendario"><i class="material-icons icono_menu">event</i>Calendario</a>
+	      	<a class="mdl-navigation__link opcion_menu_lateral" href="http://localhost:8000/misactividades"><i class="material-icons icono_menu">assignment</i>Listado</a>
+	      </div>
 
-		<div class="row ofertar">
-			<div class=".col-lg-12 boton btn btn-primary btn-lg">
-				<li><a href="#">Ofertar</a></li>
-			</div>
-			<div class="submenuOfertar btn-primary">
-				<ul>
-					<li><a href="#">Ocio</a></li>
-					<li><a href="#">Vivienda</a></li>
-					<li><a href="#">Empleo</a></li>
-				</ul>
-			</div>
-		</div>
+	      <div class="mdl-card__actions mdl-card--border">
+	      	<div class="label_menu_lateral"><i class="material-icons icono_menu">search</i>Buscar</div>
+	      	<a class="mdl-navigation__link opcion_menu_lateral" href="http://localhost:8000/buscar/ocio/"><i class="material-icons icono_menu">directions_bike</i>Ocio</a>
+	      	<a class="mdl-navigation__link opcion_menu_lateral" href="http://localhost:8000/buscar/vivienda/"><i class="material-icons icono_menu">home</i>Vivienda</a>
+	      	<a class="mdl-navigation__link opcion_menu_lateral" href="http://localhost:8000/buscar/empleo/"><i class="material-icons icono_menu">work</i>Empleo</a>
+	      	</div>
+		<div class="mdl-card__actions mdl-card--border">
+	      	<span class="label_menu_lateral"><i class="material-icons icono_menu">create</i>Ofertar</span>
+	      	<a class="mdl-navigation__link opcion_menu_lateral" href="http://localhost:8000/ofertar/ocio/"><i class="material-icons icono_menu">directions_bike</i>Ocio</a>
+	      	<a class="mdl-navigation__link opcion_menu_lateral" href="http://localhost:8000/ofertar/vivienda/"><i class="material-icons icono_menu">home</i>Vivienda</a>
+	      	<a class="mdl-navigation__link opcion_menu_lateral" href="http://localhost:8000/ofertar/empleo/"><i class="material-icons icono_menu">work</i>Empleo</a>
+	      	</div>
+	      </nav>
+    </div>
+    <main class="mdl-layout__content">
+      <div class="page-content">
+      <!-- Your content goes here -->
+		{% block content %}{% endblock %}
+      </div>
+    </main>
+  </div>
+</div>
 
-	</div>
+</body>
 
-	<div id="contenido" class="container-fluid">	
-		<div class="row cabecera">
-			<div class="col-lg-10">
-				<h1>Plan Your City</h1>
-			</div>
+<!--Llamadas a scripts-->
+<script src="/static/js/plugin/material.min.js"></script>
+<!--
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>   	  	
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>-->
+<script type="text/javascript" src="/static/js/ofertar.js"></script>
 
-			<div class="col-lg-1">
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
-				<a class="btn btn-default btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
-			    	<span class="glyphicon glyphicon glyphicon-user"> {{request.user}}</span>
-			  	</a>
-			  	<ul class="dropdown-menu">
-			    	<li><a href="http://localhost:8000/listado/">Eventos creados</a></li>
-			    	<li><a href="{% url 'auth:logout' %}?next={{ request.path }}">Logout</a></li>
-			  	</ul>
-			</div>
-		</div>
-
-		<div class="contenidoPrincipal">
-			{% block content %}{% endblock %}
-		</div>
-
-		<div id="clear"></div>
-
-		<div id="footer" class="row">
-				<p>Copyright &copy; Plain Your City 2015</p>
-		</div>
-	</div>
-
-	<!--Llamadas a scripts-->
-	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>   	  	
-	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
-	<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="/static/js/plugin/material.min.js"></script>
 	<script type="text/javascript" src="/static/js/plugin/alertify.min.js"></script>
 	<script type="text/javascript" src="/static/js/plugin/jquery.numeric.js"></script>
 	<script type="text/javascript" src="/static/js/botonEvento.js"></script>
@@ -99,10 +125,11 @@
 	<script type="text/javascript" src="/static/js/funcSubmenus.js"></script>
 	<script type="text/javascript" src="/static/js/ofertar.js"></script>
 	<script type="text/javascript" src="/static/js/hoverBoton.js"></script>
-	<script type="text/javascript" src="/static/js/submitOfertar.js"></script>
 	<script type="text/javascript" src="/static/js/sigueme.js"></script>
+	<script type="text/javascript" src="/static/js/detalleCalendario.js"></script>
+
+
 </html>
 
 
 
-               

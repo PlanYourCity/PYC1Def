@@ -1,6 +1,6 @@
 $('document').ready(function(){
 
-	$('.demo-card-wide').mouseenter(function(){
+	$('.cardEvent').mouseenter(function(){
 		$(this).addClass('hoverEvento');
 	});
 
@@ -12,17 +12,16 @@ $('document').ready(function(){
 		$(this).parent().addClass('hoverEvento');
 	});
 
-	$('.demo-card-wide').mouseleave(function(){
+	$('.cardEvent').mouseleave(function(){
 		$(this).removeClass('hoverEvento');
 	});
 
-	$('.demo-card-wide').click(function(){
+	$('.cardEvent').click(function(){
 		if($(this).hasClass('hoverEvento')) {
 
-			var a = $(this).find("h2").text();
-			alert(a);
+			var tituloEvento = $(this).find("h2").text();
 
-			window.location = "http://localhost:8000/detalle/"+a;
+			window.location = "http://localhost:8000/detalle/"+tituloEvento;
 		}
 	});
 

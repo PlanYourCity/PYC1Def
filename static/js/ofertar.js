@@ -1,11 +1,11 @@
 $('document').ready(function() {
 
     /*DATEPICKER PARA LA FECHA*/
-    $( ".calendar" ).datepicker({
+    $( ".datepicker" ).datepicker(/*{
         showOn: "button",
         buttonImage: "/static/images/iconos/calendar.svg",
         altField: "input[name='Fecha']"
-    });
+    }*/);
 
     $.datepicker.regional['es'] = {
         closeText: 'Cerrar',
@@ -25,6 +25,11 @@ $('document').ready(function() {
         yearSuffix: '',
         minDate: 0
     };
-    $.datepicker.setDefaults($.datepicker.regional['es']);    
-
+    $.datepicker.setDefaults($.datepicker.regional['es']);
 });
+
+function rellenarCiudad(element) {
+    $('#provincia').val($(element).text());
+    $('#provinciaBD').attr("value",$(element).attr("value"));
+    }
+

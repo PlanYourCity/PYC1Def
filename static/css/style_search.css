@@ -1,6 +1,52 @@
-#label_hasta_busqueda {
+/*#label_hasta_busqueda {
 	margin-left: 2em;
 	margin-right: 2em;
 	font-size: 16px;
 	text-align: left;
+}*/
+.demo-card-wide {
+	margin: auto;
+	margin-top: 5%;
+	margin-bottom: 5%;
+	width: 80%;
+}
+
+.mdl-card__title {
+	background-color: rgb(83,109,254);
+}
+
+.titulo_buscar {
+	color: white;
+}
+
+.campo {
+	margin-right: 2em !important;
+	display: inline-block;
+}
+
+#lista_ciudades {
+	height: 300px !important;
+	/*width: 200px !important;*/
+	overflow-x:hidden;
+	overflow-y:scroll;
+}
+
+#provincia {
+	width: 50%;
+	display: inline-block;
+}
+
+#provinciaBD {
+	visibility: hidden;
+}
+
+.boton_formulario {
+	margin-top: 20px;
+	margin-right: 20px;
+}
+
+.ciudades {
+	width: 250px !important;
+	display: inline-block;
+	vertical-align: bottom !important;
 }

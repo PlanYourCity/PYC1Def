@@ -1,6 +1,7 @@
-$('document').ready(function(){
+$('document').ready(function(){/*
 
-	/*VALIDACION CAMPO DE TEXTO*/
+
+	/*VALIDACION CAMPO DE TEXTO*//*
 	function caracteresEspeciales(valInput, name, type){
  		var regex = /[\$\%\&\(\)\=\¿\?\*\^\{\}\_\-\"\'\<\>]/g;
 
@@ -43,7 +44,7 @@ $('document').ready(function(){
 
 	}
 
-	/*VALIDACION DE CAMPO OBLIGATORIO*/
+	/*VALIDACION DE CAMPO OBLIGATORIO*//*
 	function campoVacio(valInput, name){
 		
 		if(valInput === ''){
@@ -59,8 +60,10 @@ $('document').ready(function(){
 
 	}
 
-	/*EVENTO PARA COMPROBAR CAMPO*/
+
+	/*EVENTO PARA COMPROBAR CAMPO*//*
 	$('#formOfertar input, textarea').blur(function(){
+
 		var valInput = $(this).val();
 		var name = $(this).attr("name");
 		var type = $(this).prop('tagName').toLowerCase();
@@ -71,11 +74,11 @@ $('document').ready(function(){
 			caracteresEspeciales(valInput, name, type)
 		}
 		
-	});
+	});*/
 
 	$('#buttonForm').click(function(e){
-
 		var error = $('.msgError').text();
+		error="";
 
 		if(error == ""){
 			var url = "/ofertar/"+$('input[type="hidden"]').val()+"/";
@@ -90,7 +93,9 @@ $('document').ready(function(){
 			  	if(data.message == true){
 			  		alertify.set('notifier','position','top-right');
 					alertify.success('¡¡Evento registrado!!');
+
 					$('#formOfertar')[0].reset();
+
 			  	}
 			  	else{
 			  		alertify.set('notifier','position','top-right');
