@@ -1,5 +1,8 @@
 $('document').ready(function() {
+    $('#lista_ciudades').perfectScrollbar();
 
+    // with vanilla JS!
+    Ps.initialize(document.getElementById('lista_ciudades'));
     /*DATEPICKER PARA LA FECHA*/
     $( ".datepicker" ).datepicker(/*{
         showOn: "button",

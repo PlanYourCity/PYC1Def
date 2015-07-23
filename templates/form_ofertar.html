@@ -4,6 +4,8 @@
 <link rel="stylesheet" type="text/css" href="/static/css/style_ofertar.css">
 <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
 <link rel="stylesheet" type="text/css" href="/static/css/plugin/alertify/alertify.min.css">
+<link rel="stylesheet" type="text/css" href="/static/css/plugin/perfect-scrollbar.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/plugin/perfect-scrollbar.min.css">
        
 	<!--<p><center><h3>{{tit}}</center></p>
     	<p><br></br></p>--> 			
@@ -20,7 +22,7 @@
 
 	  		<div class="campo ciudades">
 		
-				<label>Ciudad:</label>
+				<label class="label_campo">Ciudad:</label>
 
 <button type="button" id="menu_ciudades"
         class="mdl-button mdl-js-button mdl-button--icon">
@@ -84,7 +86,7 @@
 </ul>
 
 				<input class="mdl-textfield__input" type="text" id="provincia"  value="Madrid" disabled/>
-				<input class="mdl-textfield__input" type="text" id="provinciaBD"  name="Ciudad"  value="Madrid" />
+				<input class="mdl-textfield__input" type="hidden" id="provinciaBD"  name="Ciudad"  value="Madrid" disabled/>
 				
 			
 		        
@@ -92,14 +94,14 @@
 
 		        <div class="campo">
 			<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
-				<input class="mdl-textfield__input" type="text" id="direccion"  name="Direccion"/>
+				<input class="mdl-textfield__input" type="text" id="direccion"  name="Direccion" required="required" pattern="[^;&|%$#'\x22]+"/>
 				<label class="mdl-textfield__label" for="direccion">Dirección</label>
 			</div>
 			</div>
 
 			<div class="campo">
 			<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
-				<input class="mdl-textfield__input" type="text" id="titulo"  name="Titulo" />
+				<input class="mdl-textfield__input" type="text" id="titulo"  name="Titulo" required="required" pattern="[^;&|%$#'\x22]+"/>
 				<label class="mdl-textfield__label" for="titulo">Título del evento</label>
 			</div>
 			</div>
@@ -107,7 +109,7 @@
 
 		<div class="campo">
 		<div class="mdl-textfield mdl-js-textfield textfield-demo">
-		    <textarea class="mdl-textfield__input" type="text" rows= "4" cols="90" id="descripcion" name="Descripcion" ></textarea>
+		    <textarea class="mdl-textfield__input" type="text" rows= "3" cols="90" id="descripcion" name="Descripcion"  pattern="[^;&|%$#'\x22]+" required="required"></textarea>
 		    <label class="mdl-textfield__label" for="descripcion">Descripción</label>
 		  </div>
 		  </div>
@@ -117,7 +119,7 @@
 
 			<div class="campo">
 				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
-				    <input class="mdl-textfield__input" type="text" pattern="[0-9]+(\.[0-9]{1,2})?" id="precio" name="Precio" />
+				    <input class="mdl-textfield__input" type="text" pattern="[0-9]+(\.[0-9]{1,2})?" id="precio" name="Precio" required="required" />
 				    <label class="mdl-textfield__label" for="precio">Precio (€)</label>
 				    <span class="mdl-textfield__error">No es un precio válido</span>
 			  	</div>
@@ -125,7 +127,7 @@
 
 			  	<div class="campo">
 				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
-				    <input class="mdl-textfield__input" type="text" pattern="[1-9][0-9]*" id="aMax" name="Aforo_Max" />
+				    <input class="mdl-textfield__input" type="text" pattern="[1-9][0-9]*" id="aMax" name="Aforo_Max" required="required"  />
 				    <label class="mdl-textfield__label" for="aMax">Aforo máximo</label>
 				    <span class="mdl-textfield__error">No es un número válido</span>
 			  	</div>
@@ -160,7 +162,7 @@
 
 			<div class="campo">
 				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
-				    <input class="mdl-textfield__input" type="text" pattern="[0-9]+(\.[0-9]{1,2})?" id="precio" name="Precio" />
+				    <input class="mdl-textfield__input" type="text" pattern="[0-9]+(\.[0-9]{1,2})?" id="precio" name="Precio" required="required"/>
 				    <label class="mdl-textfield__label" for="precio">Precio (€)</label>
 				    <span class="mdl-textfield__error">No es un precio válido</span>
 			  	</div>
@@ -168,31 +170,14 @@
 
 			<div class="campo">
 				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
-				    <input class="mdl-textfield__input" type="text" pattern="[1-9][0-9]*" id="nHabit" name="NumHab" />
+				    <input class="mdl-textfield__input" type="text" pattern="[1-9][0-9]*" id="nHabit" name="NumHab" required="required"/>
 				    <label class="mdl-textfield__label" for="nHabit">Nº de habitaciones</label>
 				    <span class="mdl-textfield__error">No es un número válido</span>
 			  	</div>
 			  </div>
 
-			<div class="campo">
-			<div>
-				Tipo:
-			</div>
-			  	<div>
-				  	<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-1">
-						<input type="radio" id="option-1" class="mdl-radio__button" name="TipoOferta" value="alquiler" checked />
-						<span class="mdl-radio__label">Alquiler</span>
-					</label>
-					<br>
-					<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-2">
-						<input type="radio" id="option-2" class="mdl-radio__button" name="TipoOferta" value="venta" />
-						<span class="mdl-radio__label">Venta</span>
-					</label>
-
-				</div>
-			</div>
-
 			{% endifequal %}
+			
 
 			{% ifequal categoria "empleo" %}
 <!--
@@ -212,7 +197,7 @@
 -->
 			<div class="campo">
 				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
-				    <input class="mdl-textfield__input" type="text" pattern="[0-9]+(\.[0-9]{1,2})?" id="sueldo" name="Sueldo" />
+				    <input class="mdl-textfield__input" type="text" pattern="[0-9]+(\.[0-9]{1,2})?" id="sueldo" name="Sueldo" required="required"/>
 				    <label class="mdl-textfield__label" for="sueldo">Sueldo (€)</label>
 				    <span class="mdl-textfield__error">No es un sueldo válido</span>
 			  	</div>
@@ -221,15 +206,46 @@
 
 			<div class="campo">
 				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
-				    <input class="mdl-textfield__input" type="text" pattern="[1-9]+[0-9]*" id="Plazas" name="Plazas" />
+				    <input class="mdl-textfield__input" type="text" pattern="[1-9]+[0-9]*" id="Plazas" name="Plazas" required="required"/>
 				    <label class="mdl-textfield__label" for="plazas">Número de plazas</label>
 				    <span class="mdl-textfield__error">No es un número de plazas válido</span>
 			  	</div>
 			  	</div>
 
+			{% endifequal %}
+
+
+			<div class="campo">
+				<div class="mdl-textfield mdl-js-textfield textfield-demo">
+					<input class="mdl-textfield__input datepicker" type="text" required="required" pattern="[0-3][0-9]/[0-1][0-9]/[0-9]{4}" id="fecha" name="Fecha" readonly value=" " />
+				    <label class="mdl-textfield__label" for="fecha"></label>
+				    <div class="mdl-tooltip mdl-tooltip--large" for="fecha">
+						Fecha
+					</div>
+				    <span class="mdl-textfield__error">No es una fecha válida</span>
+			  	</div>
+			  	</div>
+			
+
+
+			<div class="campo">
+				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
+				    <input class="mdl-textfield__input" type="text" pattern="([0-1][0-9]:[1-5][0-9])|([2][0-3]:[1-5][0-9])" id="hora" name="Hora" required="required"/>
+				    <label class="mdl-textfield__label" for="hora">Hora</label>
+				    <div class="mdl-tooltip mdl-tooltip--large" for="hora">
+						HH:MM (00:00 - 23:59)
+					</div>
+				    <span class="mdl-textfield__error">Formato no válido</span>
+			  	</div>
+			  </div>
+
+			
+
+			{% ifequal categoria "empleo" %}
+
 			<div class="campo">
 				<div>
-					<label>Periodo:</label>
+					<label class="label_campo">Periodo:</label>
 
 						<select class="entrada" name="Periodo">
                            <option value="">Indiferente</option>
@@ -244,41 +260,35 @@
 
 			{% endifequal %}
 
-
-			<div class="campo">
-				<div class="mdl-textfield mdl-js-textfield textfield-demo">
-					<input class="mdl-textfield__input datepicker" type="text" pattern="[0-3][0-9]/[0-1][0-9]/[0-9]{4}" id="fecha" name="Fecha" readonly/>
-				    <label class="mdl-textfield__label" for="fecha"></label>
-				    <div class="mdl-tooltip mdl-tooltip--large" for="fecha">
-						Fecha
-					</div>
-				    <span class="mdl-textfield__error">No es una fecha válida</span>
-			  	</div>
-			  	</div>
-			
-
-
-			<div class="campo">
-				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
-				    <input class="mdl-textfield__input" type="text" pattern="[0-2][0-9]:[1-5][0-9]" id="hora" name="Hora" />
-				    <label class="mdl-textfield__label" for="hora">Hora</label>
-				    <div class="mdl-tooltip mdl-tooltip--large" for="hora">
-						HH:MM
-					</div>
-				    <span class="mdl-textfield__error">Formato no válido</span>
-			  	</div>
-			  </div>
-
-
 			<div class="campo">
 				{% ifequal categoria "empleo" %}
-				<label>Logotipo de empresa:</label>
+				<label class="label_campo">Logotipo de empresa:</label>
 				{% else %}
-				<label class="campo">Imagen:</label>
+				<label class="label_campo">Imagen:</label>
 				{% endifequal %}
 				<input class="entrada campo_rellenar" type="file" name="Imagen">
 			</div>
 
+{% ifequal categoria "vivienda" %}
+			<div class="campo">
+			<label class="label_campo">
+				Tipo:
+			</label>
+			  	<div>
+				  	<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-1">
+						<input type="radio" id="option-1" class="mdl-radio__button" name="TipoOferta" value="alquiler" checked />
+						<span class="mdl-radio__label">Alquiler</span>
+					</label>
+					<br>
+					<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-2">
+						<input type="radio" id="option-2" class="mdl-radio__button" name="TipoOferta" value="venta" />
+						<span class="mdl-radio__label">Venta</span>
+					</label>
+
+				</div>
+			</div>
+
+			{% endifequal %}
 
 	
 
@@ -299,5 +309,9 @@
 	<script type="text/javascript" src="/static/js/plugin/alertify.min.js"></script>
 	<script type="text/javascript" src="/static/js/plugin/jquery.numeric.js"></script>
 	<script type="text/javascript" src="/static/js/submitOfertar.js"></script>
+	<script type="text/javascript" src="/static/js/plugin/perfect-scrollbar.jquery.min.js"></script>
+	<script type="text/javascript" src="/static/js/plugin/perfect-scrollbar.jquery.js"></script>
+	<script type="text/javascript" src="/static/js/plugin/perfect-scrollbar.js"></script>
+	<script type="text/javascript" src="/static/js/plugin/perfect-scrollbar.min.js"></script>
 
 {% endblock%}

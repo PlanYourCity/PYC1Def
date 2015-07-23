@@ -1,10 +1,10 @@
 .label_menu_lateral {
 	padding-left: 1em;
-	font-size: 24px;
+	font-size: 22px;
 }
 
 .opcion_menu_lateral {
-	font-size: 18px;
+	font-size: 16px;
 }
 
 .opcion_boton_usuario {
@@ -18,7 +18,7 @@
 }
 
 .icono_menu {
-	font-size: 24px;
+	font-size: 22px;
 	text-align: left;
 	padding-right: 1em;
 	vertical-align: middle;
@@ -27,6 +27,7 @@
 .page-content {
 	width: 90%;
 	margin: 0 auto;
+	margin-top: 1%;
 }
 
 #icono_transparente {

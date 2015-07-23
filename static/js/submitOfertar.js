@@ -76,9 +76,27 @@ $('document').ready(function(){/*
 		
 	});*/
 
+
+
+
 	$('#buttonForm').click(function(e){
-		var error = $('.msgError').text();
-		error="";
+		var error ="";
+		
+		var formulario =  document.getElementById("formOfertar");
+		
+
+		for(var i=1; i<formulario.elements.length; i++){
+	       	if(formulario.elements[i].value==""){
+	       		if(!(formulario.elements[i].type=="button"|
+	       			formulario.elements[i].type=="file"|
+	       			formulario.elements[i].type=="select-one"|
+	       			formulario.elements[i].type=="reset")){
+
+	       			error = "error";
+	      		}
+	 
+	   		}
+	   	}
 
 		if(error == ""){
 			var url = "/ofertar/"+$('input[type="hidden"]').val()+"/";

@@ -50,10 +50,10 @@ $('document').ready(function(){
 	});*/
 
 
-    //$('#lista_ciudades').perfectScrollbar();
+    $('#lista_ciudades').perfectScrollbar();
 
     // with vanilla JS!
-    //Ps.initialize(document.getElementById('lista_ciudades'));
+    Ps.initialize(document.getElementById('lista_ciudades'));
 	
 
 });
