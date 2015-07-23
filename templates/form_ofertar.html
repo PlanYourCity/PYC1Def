@@ -1,208 +1,265 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<link rel="stylesheet" type="text/css" href="/static/css/style_ofertar.css">
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+<link rel="stylesheet" type="text/css" href="/static/css/plugin/alertify/alertify.min.css">
        
 	<!--<p><center><h3>{{tit}}</center></p>
     	<p><br></br></p>--> 			
 
-    	<div id="oferta">
-		<div id="title">
-			<h3>Formulario para ofertar {{categoria}}</h3>
-    	</div>
-		<form id="formOfertar" method="post"> <!--action= "/ofertar/{{categoria}}/"-->
-		{% csrf_token %}
-			<input type="hidden" name="category" value="{{categoria}}">
-			<div class="float_items">
-				<div class="campo">
-					Ciudad:
-				</div>
-				<div class="campo_rellenar">
-					<select class="entrada" name="Ciudad">
-						<option value='ACoruna' >A Coruña</option>
-				        <option value='Alava'>Álava</option>
-				        <option value='Albacete' >Albacete</option>
-				        <option value='Alicante'>Alicante</option>
-				        <option value='Almería' >Almería</option>
-				        <option value='Asturias' >Asturias</option>
-				        <option value='Avila' >Ávila</option>
-				        <option value='Badajoz' >Badajoz</option>
-				        <option value='Barcelona'>Barcelona</option>
-				        <option value='Burgos' >Burgos</option>
-				        <option value='Cáceres' >Cáceres</option>
-				        <option value='Cádiz' >Cádiz</option>
-				        <option value='Cantabria' >Cantabria</option>
-				        <option value='Castellón' >Castellón</option>
-				        <option value='Ceuta' >Ceuta</option>
-				        <option value='Ciudad Real' >Ciudad Real</option>
-				        <option value='Córdoba' >Córdoba</option>
-				        <option value='Cuenca' >Cuenca</option>
-				        <option value='Gerona' >Gerona</option>
-				        <option value='Girona' >Girona</option>
-				        <option value='Las Palmas' >Las Palmas</option>
-				        <option value='Granada' >Granada</option>
-				        <option value='Guadalajara' >Guadalajara</option>
-				        <option value='Guipúzcoa' >Guipúzcoa</option>
-				        <option value='Huelva' >Huelva</option>
-				        <option value='Huesca' >Huesca</option>
-				        <option value='Jaén' >Jaén</option>
-				        <option value='La Rioja' >La Rioja</option>
-				        <option value='León' >León</option>
-				        <option value='Lleida' >Lleida</option>
-				        <option value='Lugo' >Lugo</option>
-				        <option selected value='Madrid' >Madrid</option>
-				        <option value='Malaga' >Málaga</option>
-				        <option value='Mallorca' >Mallorca</option>
-				        <option value='Melilla' >Melilla</option>
-				        <option value='Murcia' >Murcia</option>
-				        <option value='Navarra' >Navarra</option>
-				        <option value='Orense' >Orense</option>
-				        <option value='Palencia' >Palencia</option>
-				        <option value='Pontevedra'>Pontevedra</option>
-				        <option value='Salamanca'>Salamanca</option>
-				        <option value='Segovia' >Segovia</option>
-				        <option value='Sevilla' >Sevilla</option>
-				        <option value='Soria' >Soria</option>
-				        <option value='Tarragona' >Tarragona</option>
-				        <option value='Tenerife' >Tenerife</option>
-				        <option value='Teruel' >Teruel</option>
-				        <option value='Toledo' >Toledo</option>
-				        <option value='Valencia' >Valencia</option>
-				        <option value='Valladolid' >Valladolid</option>
-				        <option value='Vizcaya' >Vizcaya</option>
-				        <option value='Zamora' >Zamora</option>
-				        <option value='Zaragoza'>Zaragoza</option>
-					</select>
-				</div>
-			</div>
-			<div class="float_items">
-				<label class="campo">
-					Dirección:
-				</label>
-				<input class="entrada campo_rellenar" type="text" name="Direccion" placeholder="Calle, numero, ciudad" value=""/>
-				<label class="msgError"></label>
-			</div>
-			<div class="float_items">
-				<label class="campo">
-					Título evento:
-				</label>
-				<input class="entrada campo_rellenar" type="text" name="Titulo" value=""/>
-				<label class="msgError"></label>
-			</div>
-			<div class="float_items">
-				<label class="campo">Descripción:</label>
-				<textarea class="entrada campo_rellenar" name="Descripcion" rows="4" cols="50" placeholder="Describe detalladamente el evento"></textarea>
-				<label class="msgError"></label>
-			</div>
 
-			{% ifequal categoria "ocio" %}
-				<div class="float_items">
-					<label class="campo">Precio (€):</label>
-					<input class="entrada campo_rellenar" type="number" name="Precio" min="0" value="0"/>
-					<label class="msgError"></label>
-				</div>
-				<div class="float_items">
-					<label class="campo">Aforo:</label>
-					<input class="entrada campo_rellenar" type="number" name="Aforo_Max" min="0" value="0"/>
-					<label class="msgError"></label>
-				</div>
-				<!--
-				<div class="float_items">
-					<label class="campo">Fecha:</label>
-					<input type="date" class="datepicker entrada campo_rellenar" name="Fecha"/>
-					<label class="msgError"></label>
-				</div>
-				<div class="float_items">
-					<label class="campo">Hora:</label>
-					<input class="entrada campo_rellenar" type="time" name="Hora" value=""/>	
-					<label class="msgError"></label>
-				</div>
+    	<div class="mdl-card mdl-shadow--2dp demo-card-wide">
+	  <div class="mdl-card__title">
+	    <h2 class="mdl-card__title-text titulo_ofertar">Formulario para ofertar {{categoria}}</h2>
+	  </div>
+	  <div class="mdl-card__supporting-text">
+	  	<form id="formOfertar" method="post">
+	  		{% csrf_token %}
+	  		<input type="hidden" name="category" value="{{categoria}}">
+
+	  		<div class="campo ciudades">
+		
+				<label>Ciudad:</label>
+
+<button type="button" id="menu_ciudades"
+        class="mdl-button mdl-js-button mdl-button--icon">
+				<i class="material-icons">my_location</i>
+				</button>
+
+				<ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" id="lista_ciudades"
+    for="menu_ciudades">
+<li class="mdl-menu__item" onclick="rellenarCiudad(this)" value='ACoruna'>A Coruña</li>
+<li class="mdl-menu__item" onclick="rellenarCiudad(this)" value='Alava'>Álava</li>
+<li class="mdl-menu__item" onclick="rellenarCiudad(this)" value='Albacete'>Albacete</li>
+<li class="mdl-menu__item" onclick="rellenarCiudad(this)" value='Alicante'>Alicante</li>
+<li class="mdl-menu__item" onclick="rellenarCiudad(this)" value='Almería'>Almería</li>
+<li class="mdl-menu__item" onclick="rellenarCiudad(this)" value='Asturias'>Asturias</li>
+<li class="mdl-menu__item" onclick="rellenarCiudad(this)" value='Avila'>Ávila</li>
+<li class="mdl-menu__item" onclick="rellenarCiudad(this)" value='Badajoz'>Badajoz</li>
+<li class="mdl-menu__item" onclick="rellenarCiudad(this)" value='Barcelona'>Barcelona</li>
+<li class="mdl-menu__item" onclick="rellenarCiudad(this)" value='Burgos'>Burgos</li>
+<li class="mdl-menu__item" onclick="rellenarCiudad(this)" value='Cáceres'>Cáceres</li>
+<li class="mdl-menu__item" onclick="rellenarCiudad(this)" value='Cádiz'>Cádiz</li>
+<li class="mdl-menu__item" onclick="rellenarCiudad(this)" value='Cantabria'>Cantabria</li>
+<li class="mdl-menu__item" onclick="rellenarCiudad(this)" value='Castellón'>Castellón</li>
+<li class="mdl-menu__item" onclick="rellenarCiudad(this)" value='Ceuta'>Ceuta</li>
+<li class="mdl-menu__item" onclick="rellenarCiudad(this)" value='Ciudad Real'>Ciudad Real</li>
+<li class="mdl-menu__item" onclick="rellenarCiudad(this)" value='Córdoba'>Córdoba</li>
+<li class="mdl-menu__item" onclick="rellenarCiudad(this)" value='Cuenca'>Cuenca</li>
+<li class="mdl-menu__item" onclick="rellenarCiudad(this)" value='Girona'>Girona</li>
+<li class="mdl-menu__item" onclick="rellenarCiudad(this)" value='Las Palmas'>Las Palmas</li>
+<li class="mdl-menu__item" onclick="rellenarCiudad(this)" value='Granada'>Granada</li>
+<li class="mdl-menu__item" onclick="rellenarCiudad(this)" value='Guadalajara'>Guadalaja</li>
+<li class="mdl-menu__item" onclick="rellenarCiudad(this)" value='Guipúzcoa'>Guipúzcoa</li>
+<li class="mdl-menu__item" onclick="rellenarCiudad(this)" value='Huelva'>Huelva</li>
+<li class="mdl-menu__item" onclick="rellenarCiudad(this)" value='Huesca'>Huesca</li>
+<li class="mdl-menu__item" onclick="rellenarCiudad(this)" value='Jaén'>Jaén</li>
+<li class="mdl-menu__item" onclick="rellenarCiudad(this)" value='La Rioja'>La Rioja</li>
+<li class="mdl-menu__item" onclick="rellenarCiudad(this)" value='León'>León</li>
+<li class="mdl-menu__item" onclick="rellenarCiudad(this)" value='Lleida'>Lleida</li>
+<li class="mdl-menu__item" onclick="rellenarCiudad(this)" value='Lugo'>Lugo</li>
+<li class="mdl-menu__item" onclick="rellenarCiudad(this)" value='Madrid'>Madrid</li>
+<li class="mdl-menu__item" onclick="rellenarCiudad(this)" value='Malaga'>Málaga</li>
+<li class="mdl-menu__item" onclick="rellenarCiudad(this)" value='Mallorca'>Mallorca</li>
+<li class="mdl-menu__item" onclick="rellenarCiudad(this)" value='Melilla'>Melilla</li>
+<li class="mdl-menu__item" onclick="rellenarCiudad(this)" value='Murcia'>Murcia</li>
+<li class="mdl-menu__item" onclick="rellenarCiudad(this)" value='Navarra'>Navarra</li>
+<li class="mdl-menu__item" onclick="rellenarCiudad(this)" value='Orense'>Orense</li>
+<li class="mdl-menu__item" onclick="rellenarCiudad(this)" value='Palencia'>Palencia</li>
+<li class="mdl-menu__item" onclick="rellenarCiudad(this)" value='Pontevedra'>Pontevedra</li>
+<li class="mdl-menu__item" onclick="rellenarCiudad(this)" value='Salamanca'>Salamanca</li>
+<li class="mdl-menu__item" onclick="rellenarCiudad(this)" value='Segovia'>Segovia</li>
+<li class="mdl-menu__item" onclick="rellenarCiudad(this)" value='Sevilla'>Sevilla</li>
+<li class="mdl-menu__item" onclick="rellenarCiudad(this)" value='Soria'>Soria</li>
+<li class="mdl-menu__item" onclick="rellenarCiudad(this)" value='Tarragona'>Tarragona</li>
+<li class="mdl-menu__item" onclick="rellenarCiudad(this)" value='Tenerife'>Tenerife</li>
+<li class="mdl-menu__item" onclick="rellenarCiudad(this)" value='Teruel'>Teruel</li>
+<li class="mdl-menu__item" onclick="rellenarCiudad(this)" value='Toledo'>Toledo</li>
+<li class="mdl-menu__item" onclick="rellenarCiudad(this)" value='Valencia'>Valencia</li>
+<li class="mdl-menu__item" onclick="rellenarCiudad(this)" value='Valladolid'>Valladoliz</li>
+<li class="mdl-menu__item" onclick="rellenarCiudad(this)" value='Vizcaya'>Vizcaya</li>
+<li class="mdl-menu__item" onclick="rellenarCiudad(this)" value='Zamora'>Zamora</li>
+<li class="mdl-menu__item" onclick="rellenarCiudad(this)" value='Zaragoza'>Zaragoza</li>
+</ul>
+
+				<input class="mdl-textfield__input" type="text" id="provincia"  value="Madrid" disabled/>
+				<input class="mdl-textfield__input" type="text" id="provinciaBD"  name="Ciudad"  value="Madrid" />
 				
-				<div class="float_items">
-					<label class="campo">Imagen:</label>
-					<input class="entrada campo_rellenar" type="file" name="Imagen">
-				</div>
-				-->
+			
+		        
+		        </div>
+
+		        <div class="campo">
+			<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
+				<input class="mdl-textfield__input" type="text" id="direccion"  name="Direccion"/>
+				<label class="mdl-textfield__label" for="direccion">Dirección</label>
+			</div>
+			</div>
+
+			<div class="campo">
+			<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
+				<input class="mdl-textfield__input" type="text" id="titulo"  name="Titulo" />
+				<label class="mdl-textfield__label" for="titulo">Título del evento</label>
+			</div>
+			</div>
+
+
+		<div class="campo">
+		<div class="mdl-textfield mdl-js-textfield textfield-demo">
+		    <textarea class="mdl-textfield__input" type="text" rows= "4" cols="90" id="descripcion" name="Descripcion" ></textarea>
+		    <label class="mdl-textfield__label" for="descripcion">Descripción</label>
+		  </div>
+		  </div>
+
+
+		{% ifequal categoria "ocio" %}
+
+			<div class="campo">
+				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
+				    <input class="mdl-textfield__input" type="text" pattern="[0-9]+(\.[0-9]{1,2})?" id="precio" name="Precio" />
+				    <label class="mdl-textfield__label" for="precio">Precio (€)</label>
+				    <span class="mdl-textfield__error">No es un precio válido</span>
+			  	</div>
+			  	</div>
+
+			  	<div class="campo">
+				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
+				    <input class="mdl-textfield__input" type="text" pattern="[1-9][0-9]*" id="aMax" name="Aforo_Max" />
+				    <label class="mdl-textfield__label" for="aMax">Aforo máximo</label>
+				    <span class="mdl-textfield__error">No es un número válido</span>
+			  	</div>
+			  </div>
+
 			{% endifequal %}
-
-
 
 			{% ifequal categoria "vivienda" %}
-				<div class="float_items">
-					<label class="campo">Precio (€):</label>
-					<input class="entrada campo_rellenar" type="number" name="Precio" value=""/>
-					<label class="msgError"></label>
-				</div>
-				<div class="float_items">
-					<label class="campo">Número de habitaciones:</label>
-					<input class="entrada campo_rellenar" type="text" name="NumHab" value=""/>
-					<label class="msgError"></label>
-				</div>
-				<div class="float_items">
-					<label class="campo">Tipo:</label>
-					<div class="campo_rellenar" class="entrada">
-						<input type="radio" name="TipoOferta" value="alquiler" checked="checked"> Alquiler<br>
-						<input type="radio" name="TipoOferta" value="venta"> Venta
-					</div>
-				</div>
-				<!--
-				<div class="float_items">
-					<label class="campo">Imagen:</label>
-					<input class="entrada campo_rellenar" type="file" name="Imagen">
-				</div>
-				-->
-			{% endifequal %}
 
+			<div class="campo">
+				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
+				    <input class="mdl-textfield__input" type="text" pattern="[0-9]+(\.[0-9]{1,2})?" id="precio" name="Precio" />
+				    <label class="mdl-textfield__label" for="precio">Precio (€)</label>
+				    <span class="mdl-textfield__error">No es un precio válido</span>
+			  	</div>
+			  	</div>
+
+			<div class="campo">
+				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
+				    <input class="mdl-textfield__input" type="text" pattern="[1-9][0-9]*" id="nHabit" name="NumHab" />
+				    <label class="mdl-textfield__label" for="nHabit">Nº de habitaciones</label>
+				    <span class="mdl-textfield__error">No es un número válido</span>
+			  	</div>
+			  </div>
+
+			<div class="campo">
+			<div>
+				Tipo:
+			</div>
+			  	<div>
+				  	<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-1">
+						<input type="radio" id="option-1" class="mdl-radio__button" name="TipoOferta" value="alquiler" checked />
+						<span class="mdl-radio__label">Alquiler</span>
+					</label>
+					<br>
+					<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-2">
+						<input type="radio" id="option-2" class="mdl-radio__button" name="TipoOferta" value="venta" />
+						<span class="mdl-radio__label">Venta</span>
+					</label>
+				</div>
+			</div>
+
+			{% endifequal %}
 
 			{% ifequal categoria "empleo" %}
-				<div class="float_items">
-					<label class="campo">Sueldo (€):</label>
-					<input class="entrada campo_rellenar" type="number" name="Sueldo" value=""/>
-					<label class="msgError"></label>
-				</div>
-				<div class="float_items">
-					<label class="campo">Plazas:</label>
-					<input class="entrada campo_rellenar" type="number" name="Plazas" value=""/>
-					<label class="msgError"></label>
-				</div>
-				<div class="float_items">
-					<label class="campo">Duración del contrato:</label>
-					<div class="campo_rellenar">
+			<div class="campo">
+				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
+				    <input class="mdl-textfield__input" type="text" pattern="[0-9]+(\.[0-9]{1,2})?" id="sueldo" name="Sueldo" />
+				    <label class="mdl-textfield__label" for="sueldo">Sueldo (€)</label>
+				    <span class="mdl-textfield__error">No es un sueldo válido</span>
+			  	</div>
+			  	</div>
+
+
+			<div class="campo">
+				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
+				    <input class="mdl-textfield__input" type="text" pattern="[1-9]+[0-9]*" id="Plazas" name="Plazas" />
+				    <label class="mdl-textfield__label" for="plazas">Número de plazas</label>
+				    <span class="mdl-textfield__error">No es un número de plazas válido</span>
+			  	</div>
+			  	</div>
+
+			<div class="campo">
+				<div>
+					<label>Periodo:</label>
 						<select class="entrada" name="Periodo">
-							<option value="">No Especificado</option>
-							<option value="horas">Por horas</option>
-							<option value='3m'>3 meses</option>
-							<option value='6m'>6 meses</option>
-							<option value='1anno'>1 año</option>
-							<option value='indef'>Indefinido</option>
-						</select>
-					</div>
+                           <option value="">Indiferente</option>
+                           <option value="horas">Por horas</option>
+                           <option value="3m">3 meses</option>
+                           <option value="6m">6 meses</option>
+                           <option value="1anno">1 año</option>
+                           <option value="indef">Indefinido</option>
+                       </select>
 				</div>
+				</div>
+
 			{% endifequal %}
 
-			<div class="float_items">
-				<label class="campo">Fecha:</label>
-				<input type="date" class="datepicker entrada campo_rellenar" name="Fecha"/>
-				<label class="msgError"></label>
-			</div>
-			<div class="float_items">
-				<label class="campo">Hora:</label>
-				<input class="entrada campo_rellenar" type="time" name="Hora" value=""/>	
-				<label class="msgError"></label>
-			</div>	
 
-			<div class="float_items">
+
+
+			<div class="campo">
+				<div class="mdl-textfield mdl-js-textfield textfield-demo">
+					<input class="mdl-textfield__input datepicker" type="text" pattern="[0-3][0-9]/[0-1][0-9]/[0-9]{4}" id="fecha" name="Fecha" readonly/>
+				    <label class="mdl-textfield__label" for="fecha"></label>
+				    <div class="mdl-tooltip mdl-tooltip--large" for="fecha">
+						Fecha
+					</div>
+				    <span class="mdl-textfield__error">No es una fecha válida</span>
+			  	</div>
+			  	</div>
+			
+
+
+			<div class="campo">
+				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
+				    <input class="mdl-textfield__input" type="text" pattern="[0-2][0-9]:[1-5][0-9]" id="hora" name="Hora" />
+				    <label class="mdl-textfield__label" for="hora">Hora</label>
+				    <div class="mdl-tooltip mdl-tooltip--large" for="hora">
+						HH:MM
+					</div>
+				    <span class="mdl-textfield__error">Formato no válido</span>
+			  	</div>
+			  </div>
+
+
+			<div class="campo">
 				{% ifequal categoria "empleo" %}
-				<label class="campo">Logotipo de empresa:</label>
+				<label>Logotipo de empresa:</label>
 				{% else %}
 				<label class="campo">Imagen:</label>
 				{% endifequal %}
 				<input class="entrada campo_rellenar" type="file" name="Imagen">
 			</div>
 
+
+	
+
 			<div class="float_items">
-				<button id="buttonForm" class="boton_formulario">Confirmar</button>
-				<input type="reset" class="boton_formulario" onclick="return confirm('¿Seguro que quieres restablecer el formulario?')"/>
+				<button type="button" id="buttonForm" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect boton_formulario" onclick="validar()">Confirmar</button>
+				<button type="reset" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect boton_formulario" onclick="return confirm('¿Seguro que quieres restablecer el formulario?')"/>Restablecer</button>
 			</div>
+
+
+
+
+			
 		</form>
 		</div>
+		</div>
+	<script type="text/javascript" src="/static/js/ofertar.js"></script>
+	<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="/static/js/plugin/alertify.min.js"></script>
+	<script type="text/javascript" src="/static/js/plugin/jquery.numeric.js"></script>
+	<script type="text/javascript" src="/static/js/submitOfertar.js"></script>
+
 {% endblock%}

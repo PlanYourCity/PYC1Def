@@ -20,3 +20,8 @@ $(function() {
     };
     $.datepicker.setDefaults($.datepicker.regional['es']);
 });
+
+function rellenarCiudad(element) {
+    $('#provincia').val($(element).text());
+    $('#provinciaBD').attr("value",$(element).attr("value"));
+    }

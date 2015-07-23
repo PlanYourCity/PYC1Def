@@ -1,6 +1,6 @@
-$('document').ready(function(){
+$('document').ready(function(){/*
 
-	/*VALIDACION CAMPO DE TEXTO*/
+	/*VALIDACION CAMPO DE TEXTO*//*
 	function caracteresEspeciales(valInput, name){
  		var regex = /[\$\%\&\(\)\=\¿\?\*\^\{\}\_\-\"\'\<\>]/g;
 
@@ -23,7 +23,7 @@ $('document').ready(function(){
 
 	}
 
-	/*VALIDACION DE CAMPO OBLIGATORIO*/
+	/*VALIDACION DE CAMPO OBLIGATORIO*//*
 	function campoVacio(valInput, name){
 		
 		if(valInput === ''){
@@ -39,34 +39,39 @@ $('document').ready(function(){
 
 	}
 
-	/*EVENTO PARA COMPROBAR CAMPO*/
+	/*EVENTO PARA COMPROBAR CAMPO*//*
 	$('#formOfertar input').blur(function(){
 		var valInput = $(this).val();
 		var name = $(this).attr("name");
 
 		campoVacio(valInput, name);
 		
-	});
+	});*/
 
 	$('#buttonForm').click(function(e){
-
+		alert("hola");
 		var error = $('.msgError').text();
+		error="";
 
 		if(error == ""){
 			var url = "/ofertar/"+$('input[type="hidden"]').val()+"/";
 			var img = "&Imagen="+$('input[type="file"]').val();
 			var datosForm = $('#formOfertar').serialize();
+			alert(datosForm);
 
 			$.ajax({
 			  method: "POST",
 			  url: url,
 			  data: datosForm+img,
 			  success: function(data){
+			  	alert("hola2");
 			  	if(data.message == true){
+			  		alert("hola3");
 			  		alertify.set('notifier','position','top-right');
 					alertify.success('¡¡Evento registrado!!');
 			  	}
 			  	else{
+			  		alert("error");
 			  		alertify.set('notifier','position','top-right');
 					alertify.error('¡¡El evento ya existe!!');
 			  	}
