@@ -1,4 +1,4 @@
-#oferta {
+/*#oferta {
 	margin: auto;
 }
 
@@ -70,4 +70,36 @@
 .boton_formulario:hover {
    background-color: #2E6DA4;
    color: white;
+}
+
+.datepicker, .hour{
+	width: 15%;
+	text-align: center;
+}+/
+
+.ciudades {
+	width: 250px !important;
+	display: inline-block;
+	vertical-align: bottom !important;
+}
+
+.campo {
+	margin-right: 2em !important;
+	display: inline-block;
+}
+
+#lista_ciudades {
+	height: 300px !important;
+	/*width: 200px !important;*/
+	overflow-x:hidden;
+	overflow-y:scroll;
+}
+
+#provincia {
+	width: 50%;
+	display: inline-block;
+}
+
+#provinciaBD {
+	visibility: hidden;
 }

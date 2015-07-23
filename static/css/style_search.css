@@ -31,10 +31,21 @@
 }
 
 #provincia {
-	width: 20%;
+	width: 50%;
 	display: inline-block;
 }
 
 #provinciaBD {
 	visibility: hidden;
+}
+
+.boton_formulario {
+	margin-top: 20px;
+	margin-right: 20px;
+}
+
+.ciudades {
+	width: 250px !important;
+	display: inline-block;
+	vertical-align: bottom !important;
 }

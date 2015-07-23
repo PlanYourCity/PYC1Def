@@ -23,11 +23,12 @@
 
 			<div class="campo">
 			<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
-				<input class="mdl-textfield__input" type="text" id="titulo"  name="titulo" pattern=""/>
+				<input class="mdl-textfield__input" type="text" id="titulo"  name="titulo" />
 				<label class="mdl-textfield__label" for="titulo">Título</label>
 			</div>
 			</div>
-			<div class="campo">
+			
+			<div class="campo ciudades">
 		
 				<label>Ciudad:</label>
 
@@ -152,13 +153,14 @@
 		                <option value='Zamora' >Zamora</option>
 		                <option value='Zaragoza'>Zaragoza</option>
 		            </select>-->
-		            </div>
-		            <div class="campo">
-		            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
+		            
+		            
+		            
 				<input class="mdl-textfield__input" type="text" id="provincia"  value="Cualquiera" disabled/>
 				<input class="mdl-textfield__input" type="text" id="provinciaBD"  name="provincia"  value="" />
 				
-			</div>
+			
+		        
 		        </div>
 
 			<br>
@@ -192,7 +194,7 @@
 			{% ifequal categ "ocio" %}
 			<div class="campo">
 				<div class="mdl-textfield mdl-js-textfield textfield-demo">
-					<input class="mdl-textfield__input datepicker" type="text" pattern="[0-3][0-9]/[0-1][0-9]/[0-9]{4}" id="fDesde" name="fDesde" />
+					<input class="mdl-textfield__input datepicker" type="text" pattern="[0-3][0-9]/[0-1][0-9]/[0-9]{4}" id="fDesde" name="fDesde" readonly/>
 				    <label class="mdl-textfield__label" for="fDesde"></label>
 				    <div class="mdl-tooltip mdl-tooltip--large" for="fDesde">
 						Desde
@@ -239,7 +241,7 @@
 			{% ifequal categ "vivienda" %}
 			<div class="campo">
 				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
-				    <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]{1,2})?" id="nHabit" name="nHabit" />
+				    <input class="mdl-textfield__input" type="text" pattern="[1-9][0-9]*" id="nHabit" name="nHabit" />
 				    <label class="mdl-textfield__label" for="nHabit">Nº de habitaciones</label>
 				    <span class="mdl-textfield__error">No es un número válido</span>
 			  	</div>
