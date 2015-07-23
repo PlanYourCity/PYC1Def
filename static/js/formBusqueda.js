@@ -33,6 +33,8 @@ $('document').ready(function(){
 
 		if(valInput != ''){
 			caracteresEspeciales(valInput, name);
+		}else{
+			caracteresEspeciales(valInput, name);
 		}
 		
 	});
