@@ -13,13 +13,12 @@
 }
 
 .white_box {
+	font-size: 24px;
 	overflow: visible;
 	background-color: #fff;
 	padding: 5px;
-	border-radius: 6px;
-	box-shadow: 5px 5px 7px grey;
+	border-radius: 0px;
 	word-wrap: break-word;
-	overflow: auto;
 }
 
 
@@ -29,13 +28,13 @@
 }
 
 .float_right_detalle {
-	width: 49%;
+	width: 45%;
 	float: right;
 	clear: right;
 }
 
 .float_left_detalle {
-	width: 49%;
+	width: 45%;
 	float: left;
 	clear: left;
 }
@@ -54,6 +53,7 @@
 
 #address {
 	width: 100%;
+	text-align: center;
 }
 
 #description {
@@ -61,7 +61,7 @@
 	font-size: 16px;
 	float: right;
 	clear: right;
-	width: 58%;
+	width: 50%;
 	height: 300px;
 }
 
@@ -70,21 +70,21 @@
 	width: 100%;
 	text-align: right;
 }
-
+/*
 #follow_me {
 	text-align: center;
 	font-size: 20px;
 	font-weight: bold;
 	width: 100%;
-	padding: 15px;
-	border: none;
+	padding-top: 10px;
+	padding-bottom: 10px;
 	background-color: #337AB7;
 	color: white;
 	-webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
     transition: all 0.5s ease;
-}
+}*/
 
 #follow_me:hover {
    background-color: #2E6DA4;
@@ -141,6 +141,47 @@
 #map-canvas {
 	float: left;
 	clear: left;
-	width: 40%;
+	width: 45%;
 	height: 300px; 
+}
+
+
+
+
+
+
+
+.demo-card-wide {
+	width: 80%;
+	margin: 0 auto;
+	margin-top:5%;
+	margin-bottom:5%;
+}
+
+.mdl-card__title {
+	text-align: center !important;
+	background-color: rgb(83,109,254);
+}
+
+.titulo_detalle {
+	text-align: center !important;
+	color: white;
+	font-weight: bold;
+}
+
+#follow_me {
+	text-align: center;
+	font-size: 20px;
+	font-weight: bold;
+	width: 100%;
+	/*
+	padding-top: 10px;
+	padding-bottom: 10px;*/
+	background-color: #337AB7;
+	color: white;
+}
+
+.image {
+	text-align: center;
+	margin: 1% auto;
 }
