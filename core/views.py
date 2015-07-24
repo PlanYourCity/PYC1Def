@@ -105,6 +105,7 @@ OPTIONS = """{  timeFormat: "H:mm",
                         $('#calendar').fullCalendar('gotoDate', event.start)      
                         $('#calendar').fullCalendar('changeView', 'agendaDay')
                     }
+                    window.open("http://localhost:8000/detalle/"+event.title+"/");
                 },
             }"""
 
@@ -300,7 +301,7 @@ def ofertar(request,categoria):
 				
 			image=request.POST['Imagen']
 			#ruta_imga="../../static/images/"
-
+			print(image)
 			preci=request.POST['Precio']	
 			aforo_ma=request.POST['Aforo_Max']	
 			propietari=request.user
@@ -394,16 +395,6 @@ def buscar(request,categoria,page):
 				record=record.filter(Direccion__contains=direc)
 
 			record=record.filter().exclude(Usuario_owner=request.user)
-
-			if record != []:
-				template = get_template("listado.html")		
-				diccionario = {'record':record,'categoria':categoria, 'request':request}	
-				return HttpResponse(template.render(Context(diccionario)))
-
-			else:
-				print("estoy aqui")
-				template = get_template("listado.html")		
-				return HttpResponse(template.render(Context("No existe actividad que cumpla los requisitos")))
 
 
 		if categoria=="vivienda":	
